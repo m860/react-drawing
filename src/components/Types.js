@@ -8,12 +8,15 @@ export type Point = {
 export type DrawingOption = {
     attrs?: Object,
     selectedAttrs?: Object,
-    text?: string | Function
+    text?: string | Function,
+    anchors?: Array<AnchorDrawingOption>
 };
 
 export type AnchorDrawingOption = DrawingOption & {
-    from: string,
-    to: string
+    /**
+     * Anchor的相对位置,基于所在图形的getPosition来确定真实的位置
+     */
+    offset: Point
 };
 
 export type LinkDrawingMode = {
@@ -22,17 +25,27 @@ export type LinkDrawingMode = {
 };
 
 export type LinkDrawingOption = DrawingOption & {
-    from: string,
-    to: string,
+    /**
+     * 需要连接的图形的ID和anchor ID
+     */
+    from: [string, string],
+    /**
+     * 需要连接的图形的ID
+     */
+    to: [string, string],
     mode: LinkDrawingMode
 }
 
-export type SimpleDrawingOption = DrawingOption & {
-    tag: string
+export type TagDrawingOption = DrawingOption & {
+    tag: string,
+    /**
+     * 必须是function,不能使用箭头函数
+     */
+    moveTo: (vec: Point) => void
 }
 
 export interface IDrawing {
-    constructor: (option: DrawingOption) => void
+    constructor: (option: DrawingOption) => void,
     id: string,
     graph: any,
     /**
@@ -67,6 +80,7 @@ export interface IDrawing {
      * anchors
      */
     anchors: Array<IAnchorDrawing>,
+    -listeners: Array,
     /**
      * 绘制图形
      */
@@ -80,7 +94,11 @@ export interface IDrawing {
     remove: () => void,
     moveTo: (vec: Point) => void,
     getPosition: () => Point,
-    toData: () => Object
+    toData: () => Object,
+    findAnchor: (id: string) => IDrawing & IAnchorDrawing,
+    once: (name: string, callback: Function) => void,
+    addListener: (name: string, callback: Function) => void,
+    emit: (name: string, data: any) => void
 }
 
 export interface ILinkDrawing {
@@ -89,10 +107,11 @@ export interface ILinkDrawing {
     mode: LinkDrawingMode
 }
 
-export interface ISimpleDrawing {
+export interface ITagDrawing {
     tag: string
 }
 
 export interface IAnchorDrawing {
-
+    offset: Point,
+    getOffset: () => Point
 }

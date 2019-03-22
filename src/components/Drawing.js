@@ -1,27 +1,38 @@
-import type {DrawingOption, IAnchorDrawing, IDrawing, Point} from "./Types";
+import type {AnchorDrawingOption, DrawingOption, IAnchorDrawing, IDrawing, Point} from "./Types";
 import UUID from "uuid/v1";
 import deepcopy from "deepcopy"
 import {SelectAction} from "./D3Graph";
+import merge from "deepmerge"
+import DrawingEmitter from "./DrawingEmitter";
 
 export default class Drawing implements IDrawing {
     constructor(option: DrawingOption) {
-        this.id = UUID();
+        this.id = option.id ? option.id : UUID();
         this.attrs = option.attrs;
         this.selectedAttrs = option.selectedAttrs;
         this.text = option.text;
         this.ready = false;
         this.selected = false;
-        this.anchors = [];
+        if (option.anchors && option.anchors.length > 0) {
+            const AnchorDrawing = require("./AnchorDrawing").default;
+            this.anchors = option.anchors.map((anchorOpt: AnchorDrawingOption) => {
+                return new AnchorDrawing(anchorOpt);
+            });
+        }
+        else {
+            this.anchors = [];
+        }
+        this.listeners = [];
     }
 
     applyAttrs(attrs = {}) {
         if (this.selection) {
             this.selection.call(self => {
                 for (let key in attrs) {
-                    if (key in ["x", "x1", "x2", "cx"]) {
+                    if (["x", "x1", "x2", "cx"].indexOf(key) >= 0) {
                         self.attr(key, this.graph.toScreenX(attrs[key]));
                     }
-                    else if (key in ["y", "y1", "y2", "cy"]) {
+                    else if (["y", "y1", "y2", "cy"].indexOf(key) >= 0) {
                         self.attr(key, this.graph.toScreenY(attrs[key]));
                     }
                     else {
@@ -32,21 +43,30 @@ export default class Drawing implements IDrawing {
             this.selection.attr("shape-id", this.id);
             this.text && this.selection.text(this.text);
         }
+        else {
+            throw new Error("图形还没有初始化")
+        }
     }
 
     initialize(graph) {
         this.graph = graph;
         this.ready = true;
+        this.anchors.forEach((anchor: IDrawing & IAnchorDrawing) => {
+            anchor.initialize(graph);
+        });
     }
 
     render(nextAttrs = {}) {
-        const attrs = Object.assign({}, this.attrs, this.selected ? this.selectedAttrs : {}, nextAttrs);
+        const attrs = merge.all([this.attrs, this.selected ? this.selectedAttrs : {}, nextAttrs]);
         this.applyAttrs(attrs);
         const position = this.getPosition();
-        this.anchors.forEach((anchor: IAnchorDrawing) => anchor.render({
-            cx: position.x,
-            cy: position.y
-        }))
+        this.anchors.forEach((anchor: IDrawing & IAnchorDrawing) => {
+            const anchorOffset = anchor.getOffset();
+            anchor.render({
+                cx: position.x + anchorOffset.x,
+                cy: position.y + anchorOffset.y
+            })
+        })
     }
 
     select() {
@@ -62,6 +82,7 @@ export default class Drawing implements IDrawing {
             this.selection.remove();
         }
         this.selection = null;
+        this.listeners.forEach(listener => listener.remove());
     }
 
     moveTo(vec: Point) {
@@ -81,5 +102,25 @@ export default class Drawing implements IDrawing {
                 text: this.text
             }
         }
+    }
+
+    findAnchor(id) {
+        return this.anchors.find(f => f.id === id);
+    }
+
+    once(name, callback) {
+        const listener = DrawingEmitter.once(name, callback);
+        this.listeners.push(listener);
+    }
+
+    addListener(name, callback) {
+        const listener = DrawingEmitter.addListener(name, callback);
+        console.log(`listen : ${name}`);
+        this.listeners.push(listener);
+    }
+
+    emit(name, data) {
+        console.log(`emit : ${name}`)
+        DrawingEmitter.emit(name, data);
     }
 }

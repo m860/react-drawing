@@ -89,7 +89,7 @@ class Example extends Component {
     exec() {
         try {
             const actions = fromActions(JSON.parse(this.state.actionJson));
-            // console.log(actions);
+            // console.log(JSON.stringify(actions));
             this.setState({
                 actions: actions,
                 manualActionText: JSON.stringify(actions.map(item => {
@@ -248,6 +248,82 @@ class Example extends Component {
                                       style={{width: "100%", height: 100}}></textarea>
                         </div>
                         <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", flex: "1 0 auto"}}>
+                            <button type="button"
+                                    onClick={() => {
+                                        this.setState({
+                                            actionJson: JSON.stringify([{
+                                                type: "draw",
+                                                params: [{
+                                                    type: "TagDrawing",
+                                                    option: {
+                                                        id: "tag1",
+                                                        attrs: {
+                                                            r: 20
+                                                        },
+                                                        anchors: [{
+                                                            offset: {
+                                                                x: 20,
+                                                                y: 0
+                                                            },
+                                                            attrs: {
+                                                                fill: "blue",
+                                                                stroke: "blue"
+                                                            },
+                                                            id: "right"
+                                                        }, {
+                                                            offset: {
+                                                                x: -20,
+                                                                y: 0
+                                                            }
+                                                        }, {
+                                                            offset: {
+                                                                x: 0,
+                                                                y: 20
+                                                            }
+                                                        }, {
+                                                            offset: {
+                                                                x: 0,
+                                                                y: -20
+                                                            }
+                                                        }]
+                                                    }
+                                                }]
+                                            }, {
+                                                type: "draw",
+                                                params: [{
+                                                    type: "TagDrawing",
+                                                    option: {
+                                                        id: "tag2",
+                                                        attrs: {
+                                                            cx: 200,
+                                                            r: 20
+                                                        },
+                                                        anchors: [{
+                                                            offset: {
+                                                                x: -20,
+                                                                y: 0
+                                                            },
+                                                            attrs: {
+                                                                fill: "blue",
+                                                                stroke: "blue",
+                                                            },
+                                                            id: "left"
+                                                        }]
+                                                    }
+                                                }]
+                                            }, {
+                                                type: "draw",
+                                                params: [{
+                                                    type: "LinkDrawing",
+                                                    option: {
+                                                        from: ["tag1", "right"],
+                                                        to: ["tag2", "left"]
+                                                    }
+                                                }]
+                                            }])
+                                        }, this.exec.bind(this))
+                                    }}>图形通过Anchor进行连接
+                            </button>
                             <button type="button"
                                     onClick={() => {
                                         this.setState({

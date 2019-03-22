@@ -16,7 +16,7 @@ import {get as getPath, set as setPath} from 'object-path'
 import update from 'immutability-helper'
 import {EventEmitter} from 'fbemitter'
 import UserInput from "./UserInput"
-import SimpleDrawing from "./SimpleDrawing"
+import TagDrawing from "./TagDrawing"
 import AnchorDrawing from "./AnchorDrawing"
 import LinkDrawing from "./LinkDrawing"
 
@@ -97,7 +97,7 @@ export const coordinateTypeEnum = {
 //#endregion
 
 let drawingIndex = {
-    "SimpleDrawing": SimpleDrawing,
+    "TagDrawing": TagDrawing,
     "AnchorDrawing": AnchorDrawing,
     "LinkDrawing": LinkDrawing,
 };

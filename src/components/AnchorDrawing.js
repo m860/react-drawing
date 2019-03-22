@@ -1,23 +1,27 @@
 import type {AnchorDrawingOption, IAnchorDrawing, Point} from "./Types";
 import Drawing from "./Drawing";
 import * as d3 from 'd3'
+import merge from "deepmerge"
+import DrawingEvents from "./DrawingEvents";
 
 const DefaultAnchorOption: AnchorDrawingOption = {
     attrs: {
-        fill: "transparent",
-        stroke: "black",
+        fill: "red",
+        stroke: "red",
         "stroke-width": "1px",
-        r: "10px"
+        r: 4
     }
 };
 
+/**
+ * Anchor的位置是相对于所在图形的getPosition来确定的
+ */
 export default class AnchorDrawing extends Drawing implements IAnchorDrawing {
     constructor(option: AnchorDrawingOption) {
-        const opt = Object.assign({}, DefaultAnchorOption, option);
+        const opt = merge(DefaultAnchorOption, option);
         super(opt);
         this.type = "anchor";
-        this.from = opt.from;
-        this.to = opt.to;
+        this.offset = opt.offset;
     }
 
     initialize(...args) {
@@ -27,8 +31,18 @@ export default class AnchorDrawing extends Drawing implements IAnchorDrawing {
 
     getPosition(): Point {
         return {
-            x: parseFloat(this.selection.attr("cx")),
-            y: parseFloat(this.selection.attr('cy'))
-        }
+            x: this.selection.attr("cx"),
+            y: this.selection.attr("cy")
+        };
+    }
+
+    render(...args) {
+        super.render(...args);
+        //通知LinkDrawing重新绘制
+        this.emit(DrawingEvents.anchorRender(this.id));
+    }
+
+    getOffset(): Point {
+        return this.offset;
     }
 }
