@@ -248,6 +248,18 @@ class Example extends Component {
                                       style={{width: "100%", height: 100}}></textarea>
                         </div>
                         <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", flex: "1 0 auto"}}>
+                            <button type="button"
+                                    onClick={() => {
+                                        this.setState({
+                                            actionJson: JSON.stringify([{
+                                                type: "draw",
+                                                params: [{
+                                                    type: "SimpleDrawing"
+                                                }]
+                                            }])
+                                        }, this.exec.bind(this))
+                                    }}>SimpleDrawing
+                            </button>
                             <button type="button" onClick={() => {
                                 this.setState({
                                     actionJson: JSON.stringify([{

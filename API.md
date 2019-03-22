@@ -600,7 +600,7 @@ Returns **{type: [String][140], id: [String][140], attrs: [Object][138], text: (
 
 [src/components/D3Graph.js:618-688][190]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘画线
 
@@ -628,7 +628,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:695-754][193]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘画圈
 
@@ -656,7 +656,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:761-809][196]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘制点
 
@@ -684,7 +684,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:816-847][199]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘画矩形
 
@@ -712,7 +712,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:854-967][202]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘制刻度
 
@@ -724,7 +724,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:975-1158][203]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘制带箭头的link
 
@@ -766,7 +766,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:1167-1310][207]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘制link
 
@@ -794,7 +794,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:1317-1363][210]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘画Path
 
@@ -822,7 +822,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:1370-1416][213]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘制text
 
@@ -850,7 +850,7 @@ Type: [Object][138]
 
 [src/components/D3Graph.js:1423-1586][216]
 
-**Extends Drawing**
+**Extends OldDrawing**
 
 绘制带文本的圆圈
 

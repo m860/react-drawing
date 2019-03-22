@@ -16,6 +16,10 @@ import {get as getPath, set as setPath} from 'object-path'
 import update from 'immutability-helper'
 import {EventEmitter} from 'fbemitter'
 import UserInput from "./UserInput"
+import SimpleDrawing from "./SimpleDrawing"
+import AnchorDrawing from "./AnchorDrawing"
+import LinkDrawing from "./LinkDrawing"
+
 
 //#region event
 const emitter = new EventEmitter();
@@ -40,17 +44,6 @@ type ActionOptionType = {
     params: Array,
     ops: ?Object
 };
-
-interface IDrawing {
-    defaultAttrs?: () => Object,
-    selectedAttrs?: () => Object,
-    render: () => void,
-    initialize?: (graph: mixed) => void,
-    remove?: () => void,
-    toData?: () => Object,
-    getLinkPoint?: () => Point,
-    moveTo: (vec: Point) => void
-}
 
 //#region enums
 /**
@@ -103,7 +96,11 @@ export const coordinateTypeEnum = {
 }
 //#endregion
 
-let drawingIndex = {};
+let drawingIndex = {
+    "SimpleDrawing": SimpleDrawing,
+    "AnchorDrawing": AnchorDrawing,
+    "LinkDrawing": LinkDrawing,
+};
 let actionIndex = {};
 
 /**
@@ -111,7 +108,7 @@ let actionIndex = {};
  * @param {String} name - name值必须和绘图类的类名保持一致
  * @param {Function} drawing - 绘图类
  * */
-function registerDrawing(name, drawing) {
+export function registerDrawing(name, drawing) {
     drawingIndex[name] = drawing;
 }
 
@@ -412,12 +409,12 @@ actionIndex[ActionTypeEnums.move] = MoveAction;
 
 //#endregion
 
-//#region Drawing
+//#region OldDrawing
 /**
  * 绘画接口,所有的绘画类都需要继承这个类并实现相关方法
  * @todo 添加 TextCircleDrawing 实现图(有向图/无向图)节点的绘制
  * */
-export class Drawing {
+export class OldDrawing {
 
     /**
      * @constructor
@@ -615,7 +612,7 @@ export class Drawing {
 /**
  * 绘画线
  * */
-export class LineDrawing extends Drawing {
+export class LineDrawing extends OldDrawing {
     /**
      * 线的默认attribute
      * @static
@@ -692,7 +689,7 @@ registerDrawing("LineDrawing", LineDrawing);
 /**
  * 绘画圈
  * */
-export class CircleDrawing extends Drawing {
+export class CircleDrawing extends OldDrawing {
     /**
      * 圈的默认attribute
      * @static
@@ -758,7 +755,7 @@ registerDrawing("CircleDrawing", CircleDrawing);
 /**
  * 绘制点
  * */
-export class DotDrawing extends Drawing {
+export class DotDrawing extends OldDrawing {
     /**
      * 点默认的attribute
      * @static
@@ -813,7 +810,7 @@ registerDrawing("DotDrawing", DotDrawing);
 /**
  * 绘画矩形
  * */
-export class RectDrawing extends Drawing {
+export class RectDrawing extends OldDrawing {
     /**
      * 矩形默认的attribute
      * @static
@@ -851,7 +848,7 @@ registerDrawing("RectDrawing", RectDrawing);
 /**
  * 绘制刻度
  * */
-export class NumberScaleDrawing extends Drawing {
+export class NumberScaleDrawing extends OldDrawing {
     /**
      * @constructor
      * @param {object} [option]
@@ -972,7 +969,7 @@ registerDrawing("NumberScaleDrawing", NumberScaleDrawing);
  * 绘制带箭头的link
  * @todo 实现label的修改
  * */
-export class ArrowLinkDrawing extends Drawing {
+export class ArrowLinkDrawing extends OldDrawing {
     /**
      * 带箭头link的默认attribute
      * @static
@@ -1159,162 +1156,162 @@ export class ArrowLinkDrawing extends Drawing {
 
 registerDrawing("ArrowLinkDrawing", ArrowLinkDrawing);
 
-/**
- * 绘制link
- * @todo 添加label
- * @todo 实现label的修改
- * */
-export class LinkDrawing extends Drawing {
-    /**
-     * link的默认attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {
-        fill: "none",
-        "stroke-width": "2px",
-        stroke: "black"
-    };
-    /**
-     * link的选中attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {
-        stroke: "red"
-    };
-
-    /**
-     * @constructor
-     *
-     * @param {object} option
-     * @param {string} option.sourceId - link的源id
-     * @param {string} option.targetId - link的目标id
-     * @param {string|function} option.label - link的label
-     * @param {object} option.labelAttrs - label的attributes
-     * */
-    constructor(option) {
-        super(option);
-        this.type = "LinkDrawing";
-        this.sourceId = getPath(option, "sourceId");
-        if (!this.sourceId) {
-            throw new Error(`LinkDrawing option require sourceId property`);
-        }
-        this.targetId = getPath(option, "targetId");
-        if (!this.targetId) {
-            throw new Error(`LinkDrawing option require targetId property`);
-        }
-        this.source = null;
-        this.target = null;
-        this.label = getPath(option, "label");
-        this.labelAttrs = getPath(option, "labelAttrs");
-        this.labelSelection = null;
-        this.listeners = [];
-    }
-
-    get defaultAttrs() {
-        return LinkDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return LinkDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.source = this.graph.findShapeById(this.sourceId);
-        this.target = this.graph.findShapeById(this.targetId);
-        this.selection = d3.select(graph.ele).append("line");
-        this.selection.on("mouseover", (a, b, eles) => {
-            if (eles.length > 0) {
-                const e = d3.select(eles[0]);
-                const width = parseFloat(e.attr("stroke-width"));
-                if (width < 8) {
-                    this._originalWidth = width;
-                    e.attr("stroke-width", 8)
-                }
-            }
-        }).on("mouseout", (a, b, eles) => {
-            if (eles.length > 0) {
-                if (this._originalWidth) {
-                    const e = d3.select(eles[0]);
-                    e.attr("stroke-width", this._originalWidth);
-                    delete this._originalWidth;
-                }
-            }
-        });
-        this.labelSelection = d3.select(graph.ele).append("text");
-        this.listeners.push(
-            emitter.addListener(EVENT_DRAWING_POSITION_CHANGE, shape => {
-                if (shape.id === this.sourceId || shape.id === this.targetId) {
-                    this.render();
-                }
-            })
-        )
-    }
-
-    remove() {
-        super.remove();
-        if (this.labelSelection) {
-            this.labelSelection.remove();
-        }
-        this.labelSelection = null;
-        this.listeners.forEach(listener => listener.remove());
-        emitter.emit(`remove:${this.id}`);
-    }
-
-    renderLabel(x, y) {
-        if (this.labelSelection) {
-            if (this.label) {
-                this.labelSelection.text(this.label);
-            }
-            const attrs = Object.assign({
-                x: this.graph.toScreenX(x),
-                y: this.graph.toScreenY(y)
-            }, this.labelAttrs);
-            this.updateAttrs(this.labelSelection, attrs);
-        }
-    }
-
-    render() {
-        //计算link的位置信息
-        // const p1 = this.source.getLinkPoint();
-        // const p2 = this.target.getLinkPoint();
-        const {p1, p2} = _calculateLinkPoint(this.source, this.target);
-        this.attrs = update(this.attrs, {
-            x1: {$set: p1.x},
-            y1: {$set: p1.y},
-            x2: {$set: p2.x},
-            y2: {$set: p2.y}
-        });
-        super.render();
-        const hx = Math.abs(p1.x - p2.x) / 2;
-        const hy = Math.abs(p1.y - p2.y) / 2;
-        const labelX = Math.min(p1.x, p2.x) + hx;
-        const labelY = Math.min(p1.y, p2.y) + hy;
-        this.renderLabel(labelX, labelY);
-        emitter.emit(`render:${this.id}`);
-    }
-
-    toData() {
-        return {
-            type: this.type,
-            option: {
-                id: this.id,
-                sourceId: this.sourceId,
-                targetId: this.targetId,
-                label: this.label
-            }
-        }
-    }
-}
-
-registerDrawing("LinkDrawing", LinkDrawing);
+// /**
+//  * 绘制link
+//  * @todo 添加label
+//  * @todo 实现label的修改
+//  * */
+// export class LinkDrawing extends OldDrawing {
+//     /**
+//      * link的默认attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {
+//         fill: "none",
+//         "stroke-width": "2px",
+//         stroke: "black"
+//     };
+//     /**
+//      * link的选中attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {
+//         stroke: "red"
+//     };
+//
+//     /**
+//      * @constructor
+//      *
+//      * @param {object} option
+//      * @param {string} option.sourceId - link的源id
+//      * @param {string} option.targetId - link的目标id
+//      * @param {string|function} option.label - link的label
+//      * @param {object} option.labelAttrs - label的attributes
+//      * */
+//     constructor(option) {
+//         super(option);
+//         this.type = "LinkDrawing";
+//         this.sourceId = getPath(option, "sourceId");
+//         if (!this.sourceId) {
+//             throw new Error(`LinkDrawing option require sourceId property`);
+//         }
+//         this.targetId = getPath(option, "targetId");
+//         if (!this.targetId) {
+//             throw new Error(`LinkDrawing option require targetId property`);
+//         }
+//         this.source = null;
+//         this.target = null;
+//         this.label = getPath(option, "label");
+//         this.labelAttrs = getPath(option, "labelAttrs");
+//         this.labelSelection = null;
+//         this.listeners = [];
+//     }
+//
+//     get defaultAttrs() {
+//         return LinkDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return LinkDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.source = this.graph.findShapeById(this.sourceId);
+//         this.target = this.graph.findShapeById(this.targetId);
+//         this.selection = d3.select(graph.ele).append("line");
+//         this.selection.on("mouseover", (a, b, eles) => {
+//             if (eles.length > 0) {
+//                 const e = d3.select(eles[0]);
+//                 const width = parseFloat(e.attr("stroke-width"));
+//                 if (width < 8) {
+//                     this._originalWidth = width;
+//                     e.attr("stroke-width", 8)
+//                 }
+//             }
+//         }).on("mouseout", (a, b, eles) => {
+//             if (eles.length > 0) {
+//                 if (this._originalWidth) {
+//                     const e = d3.select(eles[0]);
+//                     e.attr("stroke-width", this._originalWidth);
+//                     delete this._originalWidth;
+//                 }
+//             }
+//         });
+//         this.labelSelection = d3.select(graph.ele).append("text");
+//         this.listeners.push(
+//             emitter.addListener(EVENT_DRAWING_POSITION_CHANGE, shape => {
+//                 if (shape.id === this.sourceId || shape.id === this.targetId) {
+//                     this.render();
+//                 }
+//             })
+//         )
+//     }
+//
+//     remove() {
+//         super.remove();
+//         if (this.labelSelection) {
+//             this.labelSelection.remove();
+//         }
+//         this.labelSelection = null;
+//         this.listeners.forEach(listener => listener.remove());
+//         emitter.emit(`remove:${this.id}`);
+//     }
+//
+//     renderLabel(x, y) {
+//         if (this.labelSelection) {
+//             if (this.label) {
+//                 this.labelSelection.text(this.label);
+//             }
+//             const attrs = Object.assign({
+//                 x: this.graph.toScreenX(x),
+//                 y: this.graph.toScreenY(y)
+//             }, this.labelAttrs);
+//             this.updateAttrs(this.labelSelection, attrs);
+//         }
+//     }
+//
+//     render() {
+//         //计算link的位置信息
+//         // const p1 = this.source.getLinkPoint();
+//         // const p2 = this.target.getLinkPoint();
+//         const {p1, p2} = _calculateLinkPoint(this.source, this.target);
+//         this.attrs = update(this.attrs, {
+//             x1: {$set: p1.x},
+//             y1: {$set: p1.y},
+//             x2: {$set: p2.x},
+//             y2: {$set: p2.y}
+//         });
+//         super.render();
+//         const hx = Math.abs(p1.x - p2.x) / 2;
+//         const hy = Math.abs(p1.y - p2.y) / 2;
+//         const labelX = Math.min(p1.x, p2.x) + hx;
+//         const labelY = Math.min(p1.y, p2.y) + hy;
+//         this.renderLabel(labelX, labelY);
+//         emitter.emit(`render:${this.id}`);
+//     }
+//
+//     toData() {
+//         return {
+//             type: this.type,
+//             option: {
+//                 id: this.id,
+//                 sourceId: this.sourceId,
+//                 targetId: this.targetId,
+//                 label: this.label
+//             }
+//         }
+//     }
+// }
+//
+// registerDrawing("LinkDrawing", LinkDrawing);
 
 /**
  * 绘画Path
  * */
-export class PathDrawing extends Drawing {
+export class PathDrawing extends OldDrawing {
     /**
      * path默认的attribute
      * @static
@@ -1367,7 +1364,7 @@ registerDrawing("PathDrawing", PathDrawing)
 /**
  * 绘制text
  * */
-export class TextDrawing extends Drawing implements IDrawing {
+export class TextDrawing extends OldDrawing {
     /**
      * 文本默认的attribute
      * @static
@@ -1420,7 +1417,7 @@ registerDrawing("TextDrawing", TextDrawing)
 /**
  * 绘制带文本的圆圈
  */
-export class TextCircleDrawing extends Drawing {
+export class TextCircleDrawing extends OldDrawing {
     /**
      * 圈的默认attribute
      * @static
@@ -1587,7 +1584,7 @@ export class TextCircleDrawing extends Drawing {
 
 registerDrawing("TextCircleDrawing", TextCircleDrawing);
 
-export class LinkTextDrawing extends Drawing implements IDrawing {
+export class LinkTextDrawing extends OldDrawing {
     constructor(option) {
         super(option);
         this.type = "LinkTextDrawing";
