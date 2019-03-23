@@ -1,4 +1,4 @@
-import type {AnchorDrawingOption, DrawingOption, IAnchorDrawing, IDrawing, Point} from "../Types";
+import type {AnchorDrawingOption, DrawingOption, IAnchorDrawing, IDrawing, PathType, Point} from "../Types";
 import UUID from "uuid/v1";
 import deepcopy from "deepcopy"
 import {SelectAction} from "../D3Graph";
@@ -54,7 +54,7 @@ export default class Drawing implements IDrawing {
     }
 
     render(nextAttrs = {}) {
-        const attrs = merge.all([this.attrs||{}, this.selected ? this.selectedAttrs : {}, nextAttrs]);
+        const attrs = merge.all([this.attrs || {}, this.selected ? this.selectedAttrs : {}, nextAttrs]);
         this.applyAttrs(attrs);
         const position = this.getPosition();
         this.anchors.forEach((anchor: IAnchorDrawing) => {
@@ -120,5 +120,15 @@ export default class Drawing implements IDrawing {
     emit(name, data) {
         console.log(`emit : ${name}`)
         DrawingEmitter.emit(name, data);
+    }
+
+    formatPath(data) {
+        const arr = data.map((item: PathType) => {
+            if ((item.x === null || item.x === undefined) || (item.y === null || item.y === undefined)) {
+                return item.action;
+            }
+            return `${item.action} ${this.graph.toScreenX(item.x)} ${this.graph.toScreenY(item.y)}`
+        });
+        return arr.join(" ");
     }
 }

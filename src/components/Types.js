@@ -113,7 +113,9 @@ export interface IDrawing {
 
     addListener(name: string, callback: Function): void,
 
-    emit(name: string, data: any): void
+    emit(name: string, data: any): void,
+
+    formatPath(data: Array<PathType>): string
 }
 
 export interface ILinkDrawing extends IDrawing {

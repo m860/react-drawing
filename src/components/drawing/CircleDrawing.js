@@ -6,7 +6,8 @@ const DefaultCircleOption: DrawingOption = {
     attrs: {
         fill: "transparent",
         stroke: "black",
-        r: 10
+        r: 10,
+        "stroke-width": 1
     }
 };
 

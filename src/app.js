@@ -26,6 +26,8 @@ import D3Graph, {
 import guid from 'guid'
 import * as d3 from 'd3'
 import update from 'immutability-helper'
+import type {LinkDrawingMode} from "./components/Types";
+import {LinkDrawingModeType} from "./components/Enums";
 
 // LineDrawing.selectedAttrs = {
 //     stroke: "blue"
@@ -329,7 +331,96 @@ class Example extends Component {
                                                 }]
                                             }])
                                         }, this.exec.bind(this))
-                                    }}>图形通过Anchor进行连接
+                                    }}>连接图形
+                            </button>
+                            <button type="button"
+                                    onClick={() => {
+                                        this.setState({
+                                            actionJson: JSON.stringify([{
+                                                type: "draw",
+                                                params: [{
+                                                    type: "CircleDrawing",
+                                                    option: {
+                                                        id: "tag3",
+                                                        attrs: {
+                                                            r: 20,
+                                                            cx: 100,
+                                                            cy: 100
+                                                        },
+                                                        anchors: [{
+                                                            offset: {
+                                                                x: 20,
+                                                                y: 0
+                                                            },
+                                                            id: "right1"
+                                                        }, {
+                                                            offset: {
+                                                                x: -20,
+                                                                y: 0
+                                                            }
+                                                        }, {
+                                                            offset: {
+                                                                x: 0,
+                                                                y: 20
+                                                            }
+                                                        }, {
+                                                            offset: {
+                                                                x: 0,
+                                                                y: -20
+                                                            }
+                                                        }]
+                                                    }
+                                                }]
+                                            }, {
+                                                type: "draw",
+                                                params: [{
+                                                    type: "CircleDrawing",
+                                                    option: {
+                                                        id: "tag4",
+                                                        attrs: {
+                                                            cx: 200,
+                                                            cy: 100,
+                                                            r: 20
+                                                        },
+                                                        anchors: [{
+                                                            offset: {
+                                                                x: -20,
+                                                                y: 0
+                                                            },
+                                                            id: "left1"
+                                                        }]
+                                                    }
+                                                }]
+                                            }, {
+                                                type: "draw",
+                                                params: [{
+                                                    type: "LinkDrawing",
+                                                    option: {
+                                                        from: ["tag3", "right1"],
+                                                        to: ["tag4", "left1"],
+                                                        mode: {
+                                                            type: LinkDrawingModeType.lineWithArrow
+                                                        },
+                                                        linkText: [{
+                                                            text: "文本1",
+                                                            attrs: {
+                                                                dx: 0,
+                                                                dy: -10
+                                                            }
+                                                        }, {
+                                                            text: "文本2",
+                                                            attrs: {
+                                                                dx: 0,
+                                                                dy: 10,
+                                                                fill: "red",
+                                                                stroke: "red"
+                                                            }
+                                                        }]
+                                                    }
+                                                }]
+                                            }])
+                                        }, this.exec.bind(this))
+                                    }}>连接图形(箭头)
                             </button>
                             <button type="button" onClick={() => {
                                 this.setState({

@@ -1,5 +1,5 @@
 import TagDrawing from "./TagDrawing";
-import type {DrawingOption, IPathDrawing, PathType, PathOption, Point, TagDrawingOption} from "../Types";
+import type {IPathDrawing, PathOption, Point, TagDrawingOption} from "../Types";
 import merge from "deepmerge"
 
 const DefaultPathOption: PathOption = {
@@ -21,13 +21,7 @@ export default class PathDrawing extends TagDrawing implements IPathDrawing {
     }
 
     render(nextAttrs = {}) {
-        const d = this.d.map((item: PathType) => {
-            if ((item.x === null || item.x === undefined) || (item.y === null || item.y === undefined)) {
-                return item.action;
-            }
-            return `${item.action} ${this.graph.toScreenX(item.x)} ${this.graph.toScreenY(item.y)}`
-        });
-        super.render({d: d.join(" ")})
+        super.render({d: this.formatPath(this.d)})
     }
 
     getPosition() {

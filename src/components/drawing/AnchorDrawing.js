@@ -6,10 +6,10 @@ import DrawingEvents from "./DrawingEvents";
 
 const DefaultAnchorOption: AnchorDrawingOption = {
     attrs: {
-        fill: "red",
-        stroke: "red",
-        "stroke-width": "1px",
-        r: 4
+        fill: "blue",
+        stroke: "blue",
+        r: 4,
+        opacity: 0.2
     }
 };
 
@@ -18,7 +18,7 @@ const DefaultAnchorOption: AnchorDrawingOption = {
  */
 export default class AnchorDrawing extends Drawing implements IAnchorDrawing {
     constructor(option: AnchorDrawingOption) {
-        const opt = merge(DefaultAnchorOption, option||{});
+        const opt = merge(DefaultAnchorOption, option || {});
         super(opt);
         this.type = "anchor";
         this.offset = opt.offset;
@@ -31,8 +31,8 @@ export default class AnchorDrawing extends Drawing implements IAnchorDrawing {
 
     getPosition(): Point {
         return {
-            x: this.selection.attr("cx"),
-            y: this.selection.attr("cy")
+            x: parseFloat(this.selection.attr("cx")),
+            y: parseFloat(this.selection.attr("cy"))
         };
     }
 
