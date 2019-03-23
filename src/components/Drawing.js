@@ -83,6 +83,7 @@ export default class Drawing implements IDrawing {
         }
         this.selection = null;
         this.listeners.forEach(listener => listener.remove());
+        this.anchors.forEach(anchor => anchor.remove());
     }
 
     moveTo(vec: Point) {

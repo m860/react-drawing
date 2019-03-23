@@ -219,9 +219,9 @@ export function fromActions(actions: Array<ActionOptionType>) {
         }
         switch (type) {
             case ActionTypeEnums.draw:
-                return new actionIndex[type](...args.map(arg => fromDrawing(arg), ops));
+                return new func(...args.map(arg => fromDrawing(arg), ops));
             default:
-                return new actionIndex[type](...args, ops);
+                return new func(...args, ops);
         }
 
     })

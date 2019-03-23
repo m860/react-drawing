@@ -29,7 +29,7 @@ const DefaultTagOption: TagDrawingOption = {
 
 export default class TagDrawing extends Drawing implements ITagDrawing {
     constructor(option: TagDrawingOption) {
-        const opt = merge(DefaultTagOption, option);
+        const opt = merge(DefaultTagOption, option||{});
         super(opt);
         this.tag = opt.tag;
         this.moveTo = opt.moveTo.bind(this);

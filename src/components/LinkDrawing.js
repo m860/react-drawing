@@ -18,7 +18,7 @@ const DefaultLinkOption: LinkDrawingOption = {
 
 export default class LinkDrawing extends Drawing implements ILinkDrawing {
     constructor(option: LinkDrawingOption) {
-        const opt = merge(DefaultLinkOption, option);
+        const opt = merge(DefaultLinkOption, option||{});
         super(opt);
         this.from = opt.from;
         this.to = opt.to;

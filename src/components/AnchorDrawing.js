@@ -18,7 +18,7 @@ const DefaultAnchorOption: AnchorDrawingOption = {
  */
 export default class AnchorDrawing extends Drawing implements IAnchorDrawing {
     constructor(option: AnchorDrawingOption) {
-        const opt = merge(DefaultAnchorOption, option);
+        const opt = merge(DefaultAnchorOption, option||{});
         super(opt);
         this.type = "anchor";
         this.offset = opt.offset;

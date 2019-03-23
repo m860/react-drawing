@@ -89,7 +89,7 @@ class Example extends Component {
     exec() {
         try {
             const actions = fromActions(JSON.parse(this.state.actionJson));
-            // console.log(JSON.stringify(actions));
+            console.log(JSON.stringify(actions));
             this.setState({
                 actions: actions,
                 manualActionText: JSON.stringify(actions.map(item => {
@@ -330,11 +330,11 @@ class Example extends Component {
                                             actionJson: JSON.stringify([{
                                                 type: "draw",
                                                 params: [{
-                                                    type: "SimpleDrawing"
+                                                    type: "TagDrawing"
                                                 }]
                                             }])
                                         }, this.exec.bind(this))
-                                    }}>SimpleDrawing
+                                    }}>TagDrawing
                             </button>
                             <button type="button" onClick={() => {
                                 this.setState({
