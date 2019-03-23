@@ -1,54 +1,31 @@
-import GroupDrawing from "./GroupDrawing";
-import type {GroupOption, Point, TextCircleOption} from "../Types";
+import type {ITextCircleDrawing, Point, TextCircleOption} from "../Types";
 import CircleDrawing from "./CircleDrawing";
 import TextDrawing from "./TextDrawing";
 
-/**
- * @TODO 实现移动操作
- */
-export default class TextCircleDrawing extends GroupDrawing {
+export default class TextCircleDrawing extends CircleDrawing implements ITextCircleDrawing {
     constructor(option: TextCircleOption) {
-        if (!option.textOption || !option.circleOption) {
+        if (!option.textOption) {
             throw new Error(`option.textOption and option.circleOption is required`);
         }
-        const opt: GroupOption = {
-            drawings: [{
-                type: "TextDrawing",
-                option: option.textOption
-            }, {
-                type: "CircleDrawing",
-                option: option.circleOption
-            }]
-        };
-        super(opt);
+        super(option);
+        this.textDrawing = new TextDrawing(option.textOption);
     }
 
-    render(nextAttrs = {}) {
-        super.render(nextAttrs);
-        const [text, circle] = this.drawings;
-        circle.render();
-        const textPosition = circle.getPosition();
-        text.render({
-            x: textPosition.x,
-            y: textPosition.y
-        });
+    initialize(...args) {
+        super.initialize(...args);
+        this.textDrawing.initialize(...args);
     }
 
-    getPosition() {
-        const [text, circle] = this.drawings;
-        return circle.getPosition();
+    render(...args) {
+        super.render(...args);
+        const position = this.getPosition();
+        this.textDrawing.render({x: position.x, y: position.y})
     }
 
     moveTo(vec: Point) {
-        const [text, circle] = this.drawings;
+        super.moveTo(vec);
         const position = this.getPosition();
-        const x = position.x + vec.x;
-        const y = position.y + vec.y;
-        circle.render({
-            cx: x,
-            cy: y
-        });
-        text.render({x, y});
+        this.textDrawing.render({x: position.x, y: position.y});
     }
 
 }

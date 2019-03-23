@@ -160,6 +160,9 @@ export interface IGroupDrawing extends IDrawing {
 }
 
 export type TextCircleOption = DrawingOption & {
-    textOption: DrawingOption,
-    circleOption: DrawingOption
+    textOption: DrawingOption
+}
+
+export interface ITextCircleDrawing extends IDrawing {
+    textDrawing: IDrawing
 }
