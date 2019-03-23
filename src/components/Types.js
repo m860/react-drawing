@@ -5,7 +5,7 @@ export type Point = {
     y: number
 }
 
-export type Path = Point & {
+export type PathType = Point & {
     action: string
 };
 
@@ -139,9 +139,27 @@ export interface ILinkTextDrawing extends IDrawing {
 }
 
 export type PathOption = DrawingOption & {
-    d: Array<Path>
+    d: Array<PathType>
 }
 
 export interface IPathDrawing extends IDrawing {
-    d: Array<Path>
+    d: Array<PathType>
+}
+
+export type DrawingType = {
+    type: string,
+    option: DrawingOption & *
+};
+
+export type GroupOption = DrawingOption & {
+    drawings: Array<DrawingType>
+};
+
+export interface IGroupDrawing extends IDrawing {
+    drawings: Array<IDrawing & *>
+}
+
+export type TextCircleOption = DrawingOption & {
+    textOption: DrawingOption,
+    circleOption: DrawingOption
 }

@@ -41,10 +41,8 @@ export default class Drawing implements IDrawing {
                 }
             });
             this.selection.attr("shape-id", this.id);
+            this.selection.attr("shape-type", this.type);
             this.text && this.selection.text(this.text);
-        }
-        else {
-            throw new Error("图形还没有初始化")
         }
     }
 
@@ -56,7 +54,7 @@ export default class Drawing implements IDrawing {
     }
 
     render(nextAttrs = {}) {
-        const attrs = merge.all([this.attrs, this.selected ? this.selectedAttrs : {}, nextAttrs]);
+        const attrs = merge.all([this.attrs||{}, this.selected ? this.selectedAttrs : {}, nextAttrs]);
         this.applyAttrs(attrs);
         const position = this.getPosition();
         this.anchors.forEach((anchor: IAnchorDrawing) => {

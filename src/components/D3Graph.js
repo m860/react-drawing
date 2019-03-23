@@ -16,15 +16,10 @@ import {get as getPath, set as setPath} from 'object-path'
 import update from 'immutability-helper'
 import {EventEmitter} from 'fbemitter'
 import UserInput from "./UserInput"
-import TagDrawing from "./drawing/TagDrawing"
-import AnchorDrawing from "./drawing/AnchorDrawing"
 import LinkDrawing from "./drawing/LinkDrawing"
 import LineDrawing from "./drawing/LineDrawing"
 import CircleDrawing from "./drawing/CircleDrawing"
-import DotDrawing from "./drawing/DotDrawing"
-import RectDrawing from "./drawing/RectDrawing"
-import PathDrawing from "./drawing/PathDrawing"
-import TextDrawing from "./drawing/TextDrawing"
+import DrawingDefinition from "./drawing/index"
 
 //#region event
 const emitter = new EventEmitter();
@@ -101,17 +96,17 @@ export const coordinateTypeEnum = {
 }
 //#endregion
 
-let drawingIndex = {
-    "TagDrawing": TagDrawing,
-    "AnchorDrawing": AnchorDrawing,
-    "LinkDrawing": LinkDrawing,
-    "LineDrawing": LineDrawing,
-    "CircleDrawing": CircleDrawing,
-    "DotDrawing": DotDrawing,
-    "RectDrawing": RectDrawing,
-    "PathDrawing": PathDrawing,
-    "TextDrawing": TextDrawing,
-};
+// let DrawingDefinition = {
+//     "TagDrawing": TagDrawing,
+//     "AnchorDrawing": AnchorDrawing,
+//     "LinkDrawing": LinkDrawing,
+//     "LineDrawing": LineDrawing,
+//     "CircleDrawing": CircleDrawing,
+//     "DotDrawing": DotDrawing,
+//     "RectDrawing": RectDrawing,
+//     "PathDrawing": PathDrawing,
+//     "TextDrawing": TextDrawing,
+// };
 let actionIndex = {};
 
 /**
@@ -120,7 +115,7 @@ let actionIndex = {};
  * @param {Function} drawing - 绘图类
  * */
 export function registerDrawing(name, drawing) {
-    drawingIndex[name] = drawing;
+    DrawingDefinition[name] = drawing;
 }
 
 function copy(obj) {
@@ -189,7 +184,7 @@ function _calculateLinkPoint(source, target) {
  * 反序列化drawing
  * */
 export function fromDrawing(drawingOps: DrawingOptionType) {
-    const func = drawingIndex[drawingOps.type];
+    const func = DrawingDefinition[drawingOps.type];
     return new func(drawingOps.option);
 }
 
@@ -1424,176 +1419,176 @@ registerDrawing("ArrowLinkDrawing", ArrowLinkDrawing);
 // }
 //
 // registerDrawing("TextDrawing", TextDrawing)
-
-/**
- * 绘制带文本的圆圈
- */
-export class TextCircleDrawing extends OldDrawing {
-    /**
-     * 圈的默认attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultCircleAttrs = {
-        r: 20,
-        fill: "transparent",
-        stroke: "black"
-    };
-    /**
-     * 圈的选中attribute
-     * @static
-     * @type {Object}
-     */
-    static circleSelectedAttrs = {
-        fill: "transparent",
-        stroke: "red"
-    };
-    /**
-     * 文本的默认attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultTextAttrs = {
-        "text-anchor": "middle",
-        "dominant-baseline": "middle",
-        fill: "black"
-    };
-    /**
-     * 文本选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static textSelectedAttrs = {
-        fill: "red"
-    };
-
-    get defaultCircleAttrs() {
-        return TextCircleDrawing.defaultCircleAttrs;
-    }
-
-    get defaultCircleSelectedAttrs() {
-        return TextCircleDrawing.circleSelectedAttrs;
-    }
-
-    get defaultTextAttrs() {
-        return TextCircleDrawing.defaultTextAttrs;
-    }
-
-    get defaultTextSelectedAttrs() {
-        return TextCircleDrawing.textSelectedAttrs;
-    }
-
-    get r() {
-        return parseFloat(this.circleSelection.attr("r"));
-    }
-
-    /**
-     * @constructor
-     *
-     * @param {Object} option - 绘制的选项
-     * @param {Object} option.circleAttrs - 圆圈的属性
-     * @param {Object} option.circleSelectedAttrs - 圆圈选中的属性
-     * @param {Object} option.textAttrs - 文本的属性
-     * @param {Object} option.textSelectedAttrs - 文本选中的属性
-     * @param {String} option.text
-     *
-     * */
-    constructor(option) {
-        super(option);
-        /**
-         * 绘制的类型
-         * @member {String}
-         * */
-        this.type = "TextCircleDrawing";
-        /**
-         * 圆圈的属性
-         * @member {Object}
-         * @private
-         * */
-        this.circleAttrs = getPath(option, "circleAttrs", {});
-        /**
-         * 圆圈选中的属性
-         * @member {Object}
-         * @private
-         * */
-        this.circleSelectedAttrs = getPath(option, "circleSelectedAttrs", {});
-        /**
-         * 文本的属性
-         * @member {Object}
-         * @private
-         * */
-        this.textAttrs = getPath(option, "textAttrs", {});
-        /**
-         * 文本选中的属性
-         * @member {Object}
-         * @private
-         * */
-        this.textSelectedAttrs = getPath(option, "textSelectedAttrs", {});
-        /**
-         * 文本的selection
-         * @member {D3.Selection}
-         * @private
-         * */
-        this.textSelection = null;
-        /**
-         * 圆圈的selection
-         * @member {D3.Selection}
-         * @private
-         * */
-        this.circleSelection = null;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("g");
-        //add  circle
-        this.circleSelection = this.selection.append("circle");
-        //add text
-        this.textSelection = this.selection.append("text");
-    }
-
-    render() {
-        this.textSelection.text(this.text);
-        let circleAttrs = this.combineAttrs(this.defaultCircleAttrs, this.circleAttrs, this.defaultCircleSelectedAttrs, this.circleSelectedAttrs);
-        let textAttrs = this.combineAttrs(this.defaultTextAttrs, this.textAttrs, this.defaultTextSelectedAttrs, this.textSelectedAttrs);
-        textAttrs.x = circleAttrs.cx;
-        textAttrs.y = circleAttrs.cy;
-        this.updateAttrs(this.textSelection, textAttrs);
-        this.updateAttrs(this.circleSelection, circleAttrs);
-    }
-
-    getLinkPoint() {
-        const x = parseFloat(this.circleAttrs.cx);
-        const y = parseFloat(this.circleAttrs.cy);
-        return new Point(x, y);
-    }
-
-    toData() {
-        return {
-            type: this.type,
-            option: {
-                id: this.id,
-                text: this.text,
-                circleAttrs: copy(this.circleAttrs),
-                textAttrs: copy(this.textAttrs),
-            }
-        }
-    }
-
-    moveTo(vec) {
-        if (this.selection) {
-            this.circleAttrs.cx += vec.x;
-            this.circleAttrs.cy += vec.y;
-            this.circleSelection.attr("cx", this.graph.toScreenX(this.circleAttrs.cx))
-                .attr("cy", this.graph.toScreenY(this.circleAttrs.cy));
-            this.textSelection.attr("x", this.graph.toScreenX(this.circleAttrs.cx))
-                .attr("y", this.graph.toScreenY(this.circleAttrs.cy));
-            emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
-        }
-    }
-}
-
-registerDrawing("TextCircleDrawing", TextCircleDrawing);
+//
+// /**
+//  * 绘制带文本的圆圈
+//  */
+// export class TextCircleDrawing extends OldDrawing {
+//     /**
+//      * 圈的默认attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultCircleAttrs = {
+//         r: 20,
+//         fill: "transparent",
+//         stroke: "black"
+//     };
+//     /**
+//      * 圈的选中attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static circleSelectedAttrs = {
+//         fill: "transparent",
+//         stroke: "red"
+//     };
+//     /**
+//      * 文本的默认attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultTextAttrs = {
+//         "text-anchor": "middle",
+//         "dominant-baseline": "middle",
+//         fill: "black"
+//     };
+//     /**
+//      * 文本选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static textSelectedAttrs = {
+//         fill: "red"
+//     };
+//
+//     get defaultCircleAttrs() {
+//         return TextCircleDrawing.defaultCircleAttrs;
+//     }
+//
+//     get defaultCircleSelectedAttrs() {
+//         return TextCircleDrawing.circleSelectedAttrs;
+//     }
+//
+//     get defaultTextAttrs() {
+//         return TextCircleDrawing.defaultTextAttrs;
+//     }
+//
+//     get defaultTextSelectedAttrs() {
+//         return TextCircleDrawing.textSelectedAttrs;
+//     }
+//
+//     get r() {
+//         return parseFloat(this.circleSelection.attr("r"));
+//     }
+//
+//     /**
+//      * @constructor
+//      *
+//      * @param {Object} option - 绘制的选项
+//      * @param {Object} option.circleAttrs - 圆圈的属性
+//      * @param {Object} option.circleSelectedAttrs - 圆圈选中的属性
+//      * @param {Object} option.textAttrs - 文本的属性
+//      * @param {Object} option.textSelectedAttrs - 文本选中的属性
+//      * @param {String} option.text
+//      *
+//      * */
+//     constructor(option) {
+//         super(option);
+//         /**
+//          * 绘制的类型
+//          * @member {String}
+//          * */
+//         this.type = "TextCircleDrawing";
+//         /**
+//          * 圆圈的属性
+//          * @member {Object}
+//          * @private
+//          * */
+//         this.circleAttrs = getPath(option, "circleAttrs", {});
+//         /**
+//          * 圆圈选中的属性
+//          * @member {Object}
+//          * @private
+//          * */
+//         this.circleSelectedAttrs = getPath(option, "circleSelectedAttrs", {});
+//         /**
+//          * 文本的属性
+//          * @member {Object}
+//          * @private
+//          * */
+//         this.textAttrs = getPath(option, "textAttrs", {});
+//         /**
+//          * 文本选中的属性
+//          * @member {Object}
+//          * @private
+//          * */
+//         this.textSelectedAttrs = getPath(option, "textSelectedAttrs", {});
+//         /**
+//          * 文本的selection
+//          * @member {D3.Selection}
+//          * @private
+//          * */
+//         this.textSelection = null;
+//         /**
+//          * 圆圈的selection
+//          * @member {D3.Selection}
+//          * @private
+//          * */
+//         this.circleSelection = null;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("g");
+//         //add  circle
+//         this.circleSelection = this.selection.append("circle");
+//         //add text
+//         this.textSelection = this.selection.append("text");
+//     }
+//
+//     render() {
+//         this.textSelection.text(this.text);
+//         let circleAttrs = this.combineAttrs(this.defaultCircleAttrs, this.circleAttrs, this.defaultCircleSelectedAttrs, this.circleSelectedAttrs);
+//         let textAttrs = this.combineAttrs(this.defaultTextAttrs, this.textAttrs, this.defaultTextSelectedAttrs, this.textSelectedAttrs);
+//         textAttrs.x = circleAttrs.cx;
+//         textAttrs.y = circleAttrs.cy;
+//         this.updateAttrs(this.textSelection, textAttrs);
+//         this.updateAttrs(this.circleSelection, circleAttrs);
+//     }
+//
+//     getLinkPoint() {
+//         const x = parseFloat(this.circleAttrs.cx);
+//         const y = parseFloat(this.circleAttrs.cy);
+//         return new Point(x, y);
+//     }
+//
+//     toData() {
+//         return {
+//             type: this.type,
+//             option: {
+//                 id: this.id,
+//                 text: this.text,
+//                 circleAttrs: copy(this.circleAttrs),
+//                 textAttrs: copy(this.textAttrs),
+//             }
+//         }
+//     }
+//
+//     moveTo(vec) {
+//         if (this.selection) {
+//             this.circleAttrs.cx += vec.x;
+//             this.circleAttrs.cy += vec.y;
+//             this.circleSelection.attr("cx", this.graph.toScreenX(this.circleAttrs.cx))
+//                 .attr("cy", this.graph.toScreenY(this.circleAttrs.cy));
+//             this.textSelection.attr("x", this.graph.toScreenX(this.circleAttrs.cx))
+//                 .attr("y", this.graph.toScreenY(this.circleAttrs.cy));
+//             emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
+//         }
+//     }
+// }
+//
+// registerDrawing("TextCircleDrawing", TextCircleDrawing);
 
 // export class LinkTextDrawing extends OldDrawing {
 //     constructor(option) {
