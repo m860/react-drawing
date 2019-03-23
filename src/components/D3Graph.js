@@ -24,6 +24,7 @@ import CircleDrawing from "./drawing/CircleDrawing"
 import DotDrawing from "./drawing/DotDrawing"
 import RectDrawing from "./drawing/RectDrawing"
 import PathDrawing from "./drawing/PathDrawing"
+import TextDrawing from "./drawing/TextDrawing"
 
 //#region event
 const emitter = new EventEmitter();
@@ -109,6 +110,7 @@ let drawingIndex = {
     "DotDrawing": DotDrawing,
     "RectDrawing": RectDrawing,
     "PathDrawing": PathDrawing,
+    "TextDrawing": TextDrawing,
 };
 let actionIndex = {};
 
@@ -1370,58 +1372,58 @@ registerDrawing("ArrowLinkDrawing", ArrowLinkDrawing);
 //
 // registerDrawing("PathDrawing", PathDrawing)
 
-/**
- * 绘制text
- * */
-export class TextDrawing extends OldDrawing {
-    /**
-     * 文本默认的attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {
-        fill: "black",
-        "font-size": "20px"
-    };
-    /**
-     * 文本选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {
-        fill: "red"
-    };
-
-    constructor(option) {
-        super(option);
-        this.type = "TextDrawing";
-    }
-
-    get defaultAttrs() {
-        return TextDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return TextDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("text");
-    }
-
-    moveTo(vec: Point) {
-        if (this.selection) {
-            this.attrs.x += vec.x;
-            this.attrs.y += vec.y;
-            this.selection.attr("x", this.graph.toScreenX(this.attrs.x))
-                .attr("y", this.graph.toScreenY(this.attrs.y));
-            emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
-        }
-    }
-}
-
-registerDrawing("TextDrawing", TextDrawing)
+// /**
+//  * 绘制text
+//  * */
+// export class TextDrawing extends OldDrawing {
+//     /**
+//      * 文本默认的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {
+//         fill: "black",
+//         "font-size": "20px"
+//     };
+//     /**
+//      * 文本选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {
+//         fill: "red"
+//     };
+//
+//     constructor(option) {
+//         super(option);
+//         this.type = "TextDrawing";
+//     }
+//
+//     get defaultAttrs() {
+//         return TextDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return TextDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("text");
+//     }
+//
+//     moveTo(vec: Point) {
+//         if (this.selection) {
+//             this.attrs.x += vec.x;
+//             this.attrs.y += vec.y;
+//             this.selection.attr("x", this.graph.toScreenX(this.attrs.x))
+//                 .attr("y", this.graph.toScreenY(this.attrs.y));
+//             emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
+//         }
+//     }
+// }
+//
+// registerDrawing("TextDrawing", TextDrawing)
 
 /**
  * 绘制带文本的圆圈
@@ -1593,72 +1595,72 @@ export class TextCircleDrawing extends OldDrawing {
 
 registerDrawing("TextCircleDrawing", TextCircleDrawing);
 
-export class LinkTextDrawing extends OldDrawing {
-    constructor(option) {
-        super(option);
-        this.type = "LinkTextDrawing";
-        this.linkID = getPath(option, "linkID", null);
-        if (!this.linkID) {
-            throw new Error(`linkID is required`);
-        }
-        // this.source = null;
-        // this.target = null;
-        this.listeners = [];
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("text");
-        // const link = graph.findShapeById(this.linkID);
-        // if (link) {
-        //     this.source = link.source;
-        //     this.target = link.target;
-        // }
-        //监听link的rerender
-        this.listeners.push(
-            emitter.addListener(`remove:${this.linkID}`, () => {
-                this.remove()
-            })
-        );
-        this.listeners.push(
-            emitter.addListener(`render:${this.linkID}`, () => {
-                this.render();
-            })
-        )
-    }
-
-    // moveTo(vec: Point) {
-    //     if (this.selection) {
-    //         this.attrs.x += vec.x;
-    //         this.attrs.y += vec.y;
-    //         this.selection.attr("x", this.graph.toScreenX(this.attrs.x))
-    //             .attr("y", this.graph.toScreenY(this.attrs.y));
-    //         emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
-    //     }
-    // }
-
-    render() {
-        const link = this.graph.findShapeById(this.linkID);
-        if (link) {
-            const {p1, p2} = _calculateLinkPoint(link.source, link.target);
-            const hx = Math.abs(p1.x - p2.x) / 2;
-            const hy = Math.abs(p1.y - p2.y) / 2;
-            const labelX = Math.min(p1.x, p2.x) + hx;
-            const labelY = Math.min(p1.y, p2.y) + hy;
-            this.attrs.x = this.graph.toScreenX(labelX);
-            this.attrs.y = this.graph.toScreenY(labelY);
-            console.log(`render <LinkTextDrawing/> x:${this.attrs.x},y:${this.attrs.y}`)
-        }
-        super.render();
-    }
-
-    remove() {
-        super.remove();
-        this.listeners.forEach(listener => listener.remove());
-    }
-}
-
-registerDrawing("LinkTextDrawing", LinkTextDrawing);
+// export class LinkTextDrawing extends OldDrawing {
+//     constructor(option) {
+//         super(option);
+//         this.type = "LinkTextDrawing";
+//         this.linkID = getPath(option, "linkID", null);
+//         if (!this.linkID) {
+//             throw new Error(`linkID is required`);
+//         }
+//         // this.source = null;
+//         // this.target = null;
+//         this.listeners = [];
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("text");
+//         // const link = graph.findShapeById(this.linkID);
+//         // if (link) {
+//         //     this.source = link.source;
+//         //     this.target = link.target;
+//         // }
+//         //监听link的rerender
+//         this.listeners.push(
+//             emitter.addListener(`remove:${this.linkID}`, () => {
+//                 this.remove()
+//             })
+//         );
+//         this.listeners.push(
+//             emitter.addListener(`render:${this.linkID}`, () => {
+//                 this.render();
+//             })
+//         )
+//     }
+//
+//     // moveTo(vec: Point) {
+//     //     if (this.selection) {
+//     //         this.attrs.x += vec.x;
+//     //         this.attrs.y += vec.y;
+//     //         this.selection.attr("x", this.graph.toScreenX(this.attrs.x))
+//     //             .attr("y", this.graph.toScreenY(this.attrs.y));
+//     //         emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
+//     //     }
+//     // }
+//
+//     render() {
+//         const link = this.graph.findShapeById(this.linkID);
+//         if (link) {
+//             const {p1, p2} = _calculateLinkPoint(link.source, link.target);
+//             const hx = Math.abs(p1.x - p2.x) / 2;
+//             const hy = Math.abs(p1.y - p2.y) / 2;
+//             const labelX = Math.min(p1.x, p2.x) + hx;
+//             const labelY = Math.min(p1.y, p2.y) + hy;
+//             this.attrs.x = this.graph.toScreenX(labelX);
+//             this.attrs.y = this.graph.toScreenY(labelY);
+//             console.log(`render <LinkTextDrawing/> x:${this.attrs.x},y:${this.attrs.y}`)
+//         }
+//         super.render();
+//     }
+//
+//     remove() {
+//         super.remove();
+//         this.listeners.forEach(listener => listener.remove());
+//     }
+// }
+//
+// registerDrawing("LinkTextDrawing", LinkTextDrawing);
 //#endregion
 
 //#region Toolbar
