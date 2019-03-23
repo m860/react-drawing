@@ -5,6 +5,10 @@ export type Point = {
     y: number
 }
 
+export type Path = Point & {
+    action: string
+};
+
 export type DrawingOption = {
     attrs?: Object,
     selectedAttrs?: Object,
@@ -132,4 +136,12 @@ export interface IAnchorDrawing extends IDrawing {
 }
 
 export interface ILinkTextDrawing extends IDrawing {
+}
+
+export type PathOption = DrawingOption & {
+    d: Array<Path>
+}
+
+export interface IPathDrawing extends IDrawing {
+    d: Array<Path>
 }

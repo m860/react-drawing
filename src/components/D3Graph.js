@@ -23,6 +23,7 @@ import LineDrawing from "./drawing/LineDrawing"
 import CircleDrawing from "./drawing/CircleDrawing"
 import DotDrawing from "./drawing/DotDrawing"
 import RectDrawing from "./drawing/RectDrawing"
+import PathDrawing from "./drawing/PathDrawing"
 
 //#region event
 const emitter = new EventEmitter();
@@ -107,6 +108,7 @@ let drawingIndex = {
     "CircleDrawing": CircleDrawing,
     "DotDrawing": DotDrawing,
     "RectDrawing": RectDrawing,
+    "PathDrawing": PathDrawing,
 };
 let actionIndex = {};
 
@@ -1315,58 +1317,58 @@ registerDrawing("ArrowLinkDrawing", ArrowLinkDrawing);
 //
 // registerDrawing("LinkDrawing", LinkDrawing);
 
-/**
- * 绘画Path
- * */
-export class PathDrawing extends OldDrawing {
-    /**
-     * path默认的attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {};
-    /**
-     * path选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {};
-
-    constructor(option) {
-        super(option);
-        this.type = "PathDrawing";
-        this.d = getPath(option, "d", []);
-    }
-
-    get defaultAttrs() {
-        return PathDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return PathDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("path");
-    }
-
-    render() {
-        if (!this.attrs.d) {
-            let d = this.d.map((point, index) => {
-                if (index === 0) {
-                    return `M ${this.graph.toScreenX(point.x)} ${this.graph.toScreenY(point.y)}`
-                }
-                return `L ${this.graph.toScreenX(point.x)} ${this.graph.toScreenY(point.y)}`;
-            });
-            d.push("Z");
-            this.attrs.d = d.join(" ");
-        }
-        super.render();
-    }
-}
-
-registerDrawing("PathDrawing", PathDrawing)
+// /**
+//  * 绘画Path
+//  * */
+// export class PathDrawing extends OldDrawing {
+//     /**
+//      * path默认的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {};
+//     /**
+//      * path选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {};
+//
+//     constructor(option) {
+//         super(option);
+//         this.type = "PathDrawing";
+//         this.d = getPath(option, "d", []);
+//     }
+//
+//     get defaultAttrs() {
+//         return PathDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return PathDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("path");
+//     }
+//
+//     render() {
+//         if (!this.attrs.d) {
+//             let d = this.d.map((point, index) => {
+//                 if (index === 0) {
+//                     return `M ${this.graph.toScreenX(point.x)} ${this.graph.toScreenY(point.y)}`
+//                 }
+//                 return `L ${this.graph.toScreenX(point.x)} ${this.graph.toScreenY(point.y)}`;
+//             });
+//             d.push("Z");
+//             this.attrs.d = d.join(" ");
+//         }
+//         super.render();
+//     }
+// }
+//
+// registerDrawing("PathDrawing", PathDrawing)
 
 /**
  * 绘制text
