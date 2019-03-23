@@ -25,3 +25,19 @@ export const ActionEnum = {
     /**输入*/
     input: "input"
 };
+
+export const SelectModeEnum = {
+    single: "single",
+    multiple: "multiple"
+};
+
+export const CoordinateEnum = {
+    "screen": "screen",
+    "math": "math"
+};
+
+export const GraphEnum = {
+    none: "none",
+    draw: "draw",
+    playing: "playing"
+};

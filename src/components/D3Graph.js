@@ -20,6 +20,9 @@ import LinkDrawing from "./drawing/LinkDrawing"
 import LineDrawing from "./drawing/LineDrawing"
 import CircleDrawing from "./drawing/CircleDrawing"
 import DrawingDefinition from "./drawing/index"
+import {ActionEnum, SelectModeEnum,CoordinateEnum,GraphEnum} from "./Enums";
+import type {ActionType, DrawingType} from "./Types";
+import copy from "deepcopy"
 
 //#region event
 const emitter = new EventEmitter();
@@ -29,84 +32,7 @@ const EVENT_TOOLBAR_CHANGE = "EVENT_TOOLBAR_CHANGE";
 const EVENT_DRAWING_POSITION_CHANGE = "EVENT_DRAWING_POSITION_CHANGE";
 //#endregion
 
-/**
- * @typedef
- */
-type DrawingOptionType = {
-    type: $Values<typeof ActionTypeEnums>,
-    option: Object
-};
-/**
- * @typedef
- */
-type ActionOptionType = {
-    type: string,
-    params: Array,
-    ops: ?Object
-};
 
-//#region enums
-/**
- * action枚举
- * @readonly
- * @enum {string}
- * */
-export const ActionTypeEnums = {
-    /**绘画*/
-    draw: "draw",
-    /**重绘/更新*/
-    redraw: "redraw",
-    /**选择*/
-    select: "select",
-    /**反选*/
-    unselect: "unselect",
-    /**删除*/
-    delete: "delete",
-    /**清除所有图形*/
-    clear: "clear",
-    /**移动*/
-    move: "move",
-    // undo: "undo",
-    // /**绘画*/
-    // data: "data",
-    /**输入*/
-    input: "input"
-};
-
-/**
- * 选择模式枚举
- * @readonly
- * @enum {string}
- * @property {string} single - 单选
- * @property {string} multiple - 多选
- * */
-const selectModeEnums = {
-    single: "single",
-    multiple: "multiple"
-};
-
-export const graphModeEnum = {
-    none: "none",
-    draw: "draw",
-    playing: "playing"
-};
-export const coordinateTypeEnum = {
-    "screen": "screen",
-    "math": "math"
-}
-//#endregion
-
-// let DrawingDefinition = {
-//     "TagDrawing": TagDrawing,
-//     "AnchorDrawing": AnchorDrawing,
-//     "LinkDrawing": LinkDrawing,
-//     "LineDrawing": LineDrawing,
-//     "CircleDrawing": CircleDrawing,
-//     "DotDrawing": DotDrawing,
-//     "RectDrawing": RectDrawing,
-//     "PathDrawing": PathDrawing,
-//     "TextDrawing": TextDrawing,
-// };
 let actionIndex = {};
 
 /**
@@ -118,9 +44,6 @@ export function registerDrawing(name, drawing) {
     DrawingDefinition[name] = drawing;
 }
 
-function copy(obj) {
-    return JSON.parse(JSON.stringify(obj));
-}
 
 function isNullOrUndefined(value) {
     if (value === undefined || value === null) {
@@ -144,46 +67,11 @@ function getArrowPoints(startPoint, endPoint, distance = 5) {
     ];
 }
 
-/**
- * 计算link的链接点
- * @param source
- * @param target
- * @return {{p1: {x: *, y: *}, p2: {x: *, y: *}}}
- * @private
- */
-function _calculateLinkPoint(source, target) {
-    const q1 = source.getLinkPoint();
-    const q2 = target.getLinkPoint();
-    let p1 = {
-        x: q1.x,
-        y: q2.y
-    };
-    let p2 = {
-        x: q2.x,
-        y: q2.y
-    };
-    if (source.type === "CircleDrawing"
-        || target.type === "TextCircleDrawing") {
-        const r1 = source.r;
-        p1.x = ((r1 * (q2.x - q1.x)) / Math.sqrt(Math.pow(q1.x - q2.x, 2) + Math.pow(q1.y - q2.y, 2))) + q1.x;
-        p1.y = ((r1 * (q2.y - q1.y)) / Math.sqrt(Math.pow(q1.x - q2.x, 2) + Math.pow(q1.y - q2.y, 2))) + q1.y;
-    }
-    if (target.type === "CircleDrawing"
-        || target.type === "TextCircleDrawing") {
-        const r2 = target.r;
-        p2.x = ((r2 * (q1.x - q2.x)) / Math.sqrt(Math.pow(q1.x - q2.x, 2) + Math.pow(q1.y - q2.y, 2))) + q2.x;
-        p2.y = ((r2 * (q1.y - q2.y)) / Math.sqrt(Math.pow(q1.x - q2.x, 2) + Math.pow(q1.y - q2.y, 2))) + q2.y;
-    }
-    return {
-        p1,
-        p2
-    }
-}
 
 /**
  * 反序列化drawing
  * */
-export function fromDrawing(drawingOps: DrawingOptionType) {
+export function fromDrawing(drawingOps: DrawingType) {
     const func = DrawingDefinition[drawingOps.type];
     return new func(drawingOps.option);
 }
@@ -214,7 +102,7 @@ export function fromDrawing(drawingOps: DrawingOptionType) {
  * }])
  *
  * */
-export function fromActions(actions: Array<ActionOptionType>) {
+export function fromActions(actions: Array<ActionType>) {
     return actions.map(action => {
         const type = action.type;
         const args = action.params || [];
@@ -224,7 +112,7 @@ export function fromActions(actions: Array<ActionOptionType>) {
             throw new Error(`action ${type} is not defined`);
         }
         switch (type) {
-            case ActionTypeEnums.draw:
+            case ActionEnum.draw:
                 return new func(...args.map(arg => fromDrawing(arg), ops));
             default:
                 return new func(...args, ops);
@@ -248,7 +136,6 @@ class Action {
     constructor(type, params, ops) {
         /**
          * action的类型,是一个枚举值
-         * @member {ActionTypeEnums}
          * */
         this.type = type;
         /**
@@ -289,12 +176,12 @@ export class InputAction extends Action {
      * @param {?Object} ops
      */
     constructor(params, ops) {
-        super(ActionTypeEnums.input, params, ops);
+        super(ActionEnum.input, params, ops);
         this.canBreak = true;
     }
 }
 
-actionIndex[ActionTypeEnums.input] = InputAction;
+actionIndex[ActionEnum.input] = InputAction;
 
 /**
  * 绘图action
@@ -309,11 +196,11 @@ actionIndex[ActionTypeEnums.input] = InputAction;
  * */
 export class DrawAction extends Action {
     constructor(drawingOps, ops) {
-        super(ActionTypeEnums.draw, drawingOps, ops)
+        super(ActionEnum.draw, drawingOps, ops)
     }
 }
 
-actionIndex[ActionTypeEnums.draw] = DrawAction;
+actionIndex[ActionEnum.draw] = DrawAction;
 
 /**
  * 选择action
@@ -325,11 +212,11 @@ actionIndex[ActionTypeEnums.draw] = DrawAction;
  * */
 export class SelectAction extends Action {
     constructor(shapeId, ops) {
-        super(ActionTypeEnums.select, shapeId, ops)
+        super(ActionEnum.select, shapeId, ops)
     }
 }
 
-actionIndex[ActionTypeEnums.select] = SelectAction;
+actionIndex[ActionEnum.select] = SelectAction;
 
 /**
  * 取消选择action
@@ -341,11 +228,11 @@ actionIndex[ActionTypeEnums.select] = SelectAction;
  * */
 export class UnSelectAction extends Action {
     constructor(shapeId, ops) {
-        super(ActionTypeEnums.unselect, shapeId, ops)
+        super(ActionEnum.unselect, shapeId, ops)
     }
 }
 
-actionIndex[ActionTypeEnums.unselect] = UnSelectAction;
+actionIndex[ActionEnum.unselect] = UnSelectAction;
 
 /**
  * 删除图形action
@@ -357,11 +244,11 @@ actionIndex[ActionTypeEnums.unselect] = UnSelectAction;
  * */
 export class DeleteAction extends Action {
     constructor(shapeId, ops) {
-        super(ActionTypeEnums.delete, shapeId, ops);
+        super(ActionEnum.delete, shapeId, ops);
     }
 }
 
-actionIndex[ActionTypeEnums.delete] = DeleteAction;
+actionIndex[ActionEnum.delete] = DeleteAction;
 
 /**
  * 清除所有的图形action
@@ -373,11 +260,11 @@ actionIndex[ActionTypeEnums.delete] = DeleteAction;
  * */
 export class ClearAction extends Action {
     constructor(ops) {
-        super(ActionTypeEnums.clear, null, ops);
+        super(ActionEnum.clear, null, ops);
     }
 }
 
-actionIndex[ActionTypeEnums.clear] = ClearAction;
+actionIndex[ActionEnum.clear] = ClearAction;
 
 
 /**
@@ -385,14 +272,14 @@ actionIndex[ActionTypeEnums.clear] = ClearAction;
  * */
 export class ReDrawAction extends Action {
     constructor(shapeId, state, ops) {
-        super(ActionTypeEnums.redraw, {
+        super(ActionEnum.redraw, {
             id: shapeId,
             state: state
         }, ops)
     }
 }
 
-actionIndex[ActionTypeEnums.redraw] = ReDrawAction;
+actionIndex[ActionEnum.redraw] = ReDrawAction;
 
 /**
  * 移动action
@@ -404,14 +291,14 @@ export class MoveAction extends Action {
      * @param {object} vec - 位移
      */
     constructor(shapeId, vec) {
-        super(ActionTypeEnums.move, {
+        super(ActionEnum.move, {
             id: shapeId,
             vec: vec
         })
     }
 }
 
-actionIndex[ActionTypeEnums.move] = MoveAction;
+actionIndex[ActionEnum.move] = MoveAction;
 
 //#endregion
 
@@ -2188,7 +2075,7 @@ export default class D3Graph extends Component {
         attrs: PropTypes.object,
         //action
         actions: PropTypes.arrayOf(PropTypes.shape({
-            type: PropTypes.oneOf(Object.keys(ActionTypeEnums)).isRequired,
+            type: PropTypes.oneOf(Object.keys(ActionEnum)).isRequired,
             params: PropTypes.any
         })),
         // //默认的图形的样式
@@ -2204,7 +2091,7 @@ export default class D3Graph extends Component {
         // 	dot: PropTypes.object,
         // }),
         //选择模式,是多选还是单选
-        selectMode: PropTypes.oneOf(Object.keys(selectModeEnums)),
+        selectMode: PropTypes.oneOf(Object.keys(SelectModeEnum)),
         //自定义绘制类型
         // customDefinedDrawing: PropTypes.object,
         // onDrawTypeChange: PropTypes.func,
@@ -2212,8 +2099,8 @@ export default class D3Graph extends Component {
             x: PropTypes.number,
             y: PropTypes.number
         }),
-        coordinateType: PropTypes.oneOf(Object.keys(coordinateTypeEnum)),
-        mode: PropTypes.oneOf(Object.keys(graphModeEnum)),
+        coordinateType: PropTypes.oneOf(Object.keys(CoordinateEnum)),
+        mode: PropTypes.oneOf(Object.keys(GraphEnum)),
         playingOption: PropTypes.shape({
             interval: PropTypes.number
         }),
@@ -2231,14 +2118,14 @@ export default class D3Graph extends Component {
                 backgroundColor: "#cccccc"
             }
         },
-        selectMode: selectModeEnums.single,
+        selectMode: SelectModeEnum.single,
         actions: [],
         original: {
             x: 0,
             y: 0
         },
-        coordinateType: coordinateTypeEnum.screen,
-        mode: graphModeEnum.none,
+        coordinateType: CoordinateEnum.screen,
+        mode: GraphEnum.none,
         renderToolbar: () => null,
         scale: 1,
         interval: 1,
@@ -2314,7 +2201,7 @@ export default class D3Graph extends Component {
      * @private
      * */
     toScreenY(value) {
-        if (this.state.coordinateType === coordinateTypeEnum.screen) {
+        if (this.state.coordinateType === CoordinateEnum.screen) {
             return this.state.original.y + parseFloat(value) * this.state.scale;
         }
         return this.state.original.y - parseFloat(value) * this.state.scale;
@@ -2327,7 +2214,7 @@ export default class D3Graph extends Component {
      * @return {number}
      */
     toLocalX(screenX) {
-        if (this.state.coordinateType === coordinateTypeEnum.math) {
+        if (this.state.coordinateType === CoordinateEnum.math) {
             return (screenX - this.state.original.x) / this.state.scale;
         }
         return screenX / this.state.scale;
@@ -2340,7 +2227,7 @@ export default class D3Graph extends Component {
      * @return {number}
      */
     toLocalY(screenY) {
-        if (this.state.coordinateType === coordinateTypeEnum.math) {
+        if (this.state.coordinateType === CoordinateEnum.math) {
             return (this.state.original.y - screenY) / this.state.scale;
         }
         return screenY / this.state.scale;
@@ -2365,12 +2252,12 @@ export default class D3Graph extends Component {
 
     async doActionAsync(action) {
         switch (action.type) {
-            case ActionTypeEnums.draw: {
+            case ActionEnum.draw: {
                 this.shapes.push(action.params);
                 this.drawShapes([action.params]);
                 break;
             }
-            case ActionTypeEnums.redraw: {
+            case ActionEnum.redraw: {
                 const index = this.shapes.findIndex(f => f.id === action.params.id);
                 if (index >= 0) {
                     if (action.params.state) {
@@ -2389,7 +2276,7 @@ export default class D3Graph extends Component {
                 }
                 break;
             }
-            case ActionTypeEnums.select: {
+            case ActionEnum.select: {
                 const id = action.params;
                 let shape = this.findShapeById(id);
                 if (shape.selected) {
@@ -2397,7 +2284,7 @@ export default class D3Graph extends Component {
                 }
                 else {
                     shape.selected = true;
-                    if (this.props.selectMode === selectModeEnums.single) {
+                    if (this.props.selectMode === SelectModeEnum.single) {
                         //将已选中的shape取消选中
                         this.selectedShapes.map(f => f.id).forEach(async i => {
                             await this.doActionAsync(new UnSelectAction(i));
@@ -2411,7 +2298,7 @@ export default class D3Graph extends Component {
                 this.drawShapes([shape]);
                 break;
             }
-            case ActionTypeEnums.unselect: {
+            case ActionEnum.unselect: {
                 const id = action.params;
                 let shape = this.findShapeById(id);
                 shape.selected = false;
@@ -2419,7 +2306,7 @@ export default class D3Graph extends Component {
                 this.drawShapes([shape]);
                 break;
             }
-            case ActionTypeEnums.delete: {
+            case ActionEnum.delete: {
                 const id = action.params;
                 //删除的图形
                 const shape = this.shapes.find(s => s.id === id);
@@ -2434,19 +2321,19 @@ export default class D3Graph extends Component {
                 }
                 break;
             }
-            case ActionTypeEnums.clear: {
+            case ActionEnum.clear: {
                 this.shapes.forEach(async shape => {
                     await this.doActionAsync(new DeleteAction(shape.id))
                 });
                 this.selectedShapes = [];
                 break;
             }
-            case ActionTypeEnums.input: {
+            case ActionEnum.input: {
                 //显示用户输入
                 await this.showUserInputPromise(action);
                 break;
             }
-            case ActionTypeEnums.move: {
+            case ActionEnum.move: {
                 const shape = this.shapes.find(f => f.id === action.params.id);
                 if (shape) {
                     shape.moveTo(action.params.vec);
@@ -2525,7 +2412,7 @@ export default class D3Graph extends Component {
      */
     getDrawingData() {
         console.warn(`getDrawingData 方法将在下一个版本删除掉,请使用 getDrawingActions 代替`);
-        const actions = this.state.actions.filter(f => f.type === ActionTypeEnums.draw);
+        const actions = this.state.actions.filter(f => f.type === ActionEnum.draw);
         return actions.map((item) => {
             const shape = this.findShapeById(item.params.id);
             return {
@@ -2540,7 +2427,7 @@ export default class D3Graph extends Component {
      * @return {*[]}
      */
     getDrawingActions() {
-        const actions = this.state.actions.filter(f => f.type === ActionTypeEnums.draw);
+        const actions = this.state.actions.filter(f => f.type === ActionEnum.draw);
         return actions.map((item) => {
             const shape = this.findShapeById(item.params.id);
             return {

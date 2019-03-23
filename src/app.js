@@ -2,32 +2,21 @@ import './sass/index.sass'
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import D3Graph, {
-    ActionTypeEnums,
-    ArrowLinkDrawing,
     ArrowLinkToolbar,
-    CircleDrawing,
     CircleToolbar,
-    DotDrawing,
     DrawingToolbar,
     fromActions,
-    LineDrawing,
     LineToolbar,
-    LinkDrawing,
     LinkToolbar,
     MoveToolbar,
     NoneToolbar,
     NumberScaleDrawing,
-    PathDrawing,
-    TextCircleDrawing,
     TextCircleToolbar,
-    TextDrawing,
-    TextToolbar
 } from './components/D3Graph'
 import guid from 'guid'
 import * as d3 from 'd3'
 import update from 'immutability-helper'
-import type {LinkDrawingMode} from "./components/Types";
-import {LinkDrawingModeType} from "./components/Enums";
+import {ActionEnum, LinkDrawingModeType} from "./components/Enums";
 
 // LineDrawing.selectedAttrs = {
 //     stroke: "blue"
@@ -604,7 +593,7 @@ class Example extends Component {
                                             const first = selected[0];
                                             this.setState({
                                                 actionJson: JSON.stringify([{
-                                                    type: ActionTypeEnums.move,
+                                                    type: ActionEnum.move,
                                                     params: [first.id, {
                                                         x: 10,
                                                         y: 10
