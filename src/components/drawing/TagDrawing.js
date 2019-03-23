@@ -1,5 +1,5 @@
 import Drawing from "./Drawing";
-import type {ITagDrawing, Point, TagDrawingOption} from "./Types";
+import type {ITagDrawing, Point, TagDrawingOption} from "../Types";
 import * as d3 from 'd3'
 import merge from "deepmerge"
 

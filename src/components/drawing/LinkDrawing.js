@@ -1,7 +1,7 @@
 import Drawing from "./Drawing";
-import type {ILinkDrawing, LinkDrawingOption} from "./Types";
+import type {ILinkDrawing, LinkDrawingOption} from "../Types";
 import * as d3 from 'd3'
-import {LinkDrawingModeType} from "./Enums";
+import {LinkDrawingModeType} from "../Enums";
 import merge from "deepmerge"
 import DrawingEvents from "./DrawingEvents";
 

@@ -1,7 +1,7 @@
-import type {AnchorDrawingOption, DrawingOption, IAnchorDrawing, IDrawing, Point} from "./Types";
+import type {AnchorDrawingOption, DrawingOption, IAnchorDrawing, IDrawing, Point} from "../Types";
 import UUID from "uuid/v1";
 import deepcopy from "deepcopy"
-import {SelectAction} from "./D3Graph";
+import {SelectAction} from "../D3Graph";
 import merge from "deepmerge"
 import DrawingEmitter from "./DrawingEmitter";
 

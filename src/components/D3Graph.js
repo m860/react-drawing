@@ -16,9 +16,9 @@ import {get as getPath, set as setPath} from 'object-path'
 import update from 'immutability-helper'
 import {EventEmitter} from 'fbemitter'
 import UserInput from "./UserInput"
-import TagDrawing from "./TagDrawing"
-import AnchorDrawing from "./AnchorDrawing"
-import LinkDrawing from "./LinkDrawing"
+import TagDrawing from "./drawing/TagDrawing"
+import AnchorDrawing from "./drawing/AnchorDrawing"
+import LinkDrawing from "./drawing/LinkDrawing"
 
 
 //#region event

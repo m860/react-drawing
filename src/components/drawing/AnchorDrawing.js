@@ -1,4 +1,4 @@
-import type {AnchorDrawingOption, IAnchorDrawing, Point} from "./Types";
+import type {AnchorDrawingOption, IAnchorDrawing, Point} from "../Types";
 import Drawing from "./Drawing";
 import * as d3 from 'd3'
 import merge from "deepmerge"
