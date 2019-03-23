@@ -80,7 +80,7 @@ export interface IDrawing {
      * anchors
      */
     anchors: Array<IAnchorDrawing>,
-    -listeners: Array,
+    listeners: Array,
     /**
      * 绘制图形
      */
