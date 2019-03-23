@@ -2,139 +2,139 @@
 
 ### Table of Contents
 
--   [AnchorDrawing][1]
-    -   [Parameters][2]
--   [PureComponent][3]
--   [DrawingOptionType][4]
+-   [PureComponent][1]
+-   [DrawingOptionType][2]
+    -   [Properties][3]
+-   [ActionOptionType][4]
     -   [Properties][5]
--   [ActionOptionType][6]
-    -   [Properties][7]
--   [ActionTypeEnums][8]
-    -   [draw][9]
-    -   [redraw][10]
-    -   [select][11]
-    -   [unselect][12]
-    -   [delete][13]
-    -   [clear][14]
-    -   [move][15]
-    -   [input][16]
--   [selectModeEnums][17]
-    -   [Properties][18]
--   [registerDrawing][19]
+-   [ActionTypeEnums][6]
+    -   [draw][7]
+    -   [redraw][8]
+    -   [select][9]
+    -   [unselect][10]
+    -   [delete][11]
+    -   [clear][12]
+    -   [move][13]
+    -   [input][14]
+-   [selectModeEnums][15]
+    -   [Properties][16]
+-   [registerDrawing][17]
+    -   [Parameters][18]
+-   [fromDrawing][19]
     -   [Parameters][20]
--   [fromDrawing][21]
+-   [fromActions][21]
     -   [Parameters][22]
--   [fromActions][23]
-    -   [Parameters][24]
-    -   [Examples][25]
--   [Action][26]
-    -   [Parameters][27]
-    -   [type][28]
-    -   [params][29]
-    -   [nextInterval][30]
-    -   [canBreak][31]
--   [InputAction][32]
+    -   [Examples][23]
+-   [Action][24]
+    -   [Parameters][25]
+    -   [type][26]
+    -   [params][27]
+    -   [nextInterval][28]
+    -   [canBreak][29]
+-   [InputAction][30]
+    -   [Parameters][31]
+-   [DrawAction][32]
     -   [Parameters][33]
--   [DrawAction][34]
-    -   [Parameters][35]
-    -   [Examples][36]
--   [SelectAction][37]
-    -   [Parameters][38]
-    -   [Examples][39]
--   [UnSelectAction][40]
-    -   [Parameters][41]
-    -   [Examples][42]
--   [DeleteAction][43]
-    -   [Parameters][44]
-    -   [Examples][45]
--   [ClearAction][46]
-    -   [Parameters][47]
-    -   [Examples][48]
--   [ReDrawAction][49]
+    -   [Examples][34]
+-   [SelectAction][35]
+    -   [Parameters][36]
+    -   [Examples][37]
+-   [UnSelectAction][38]
+    -   [Parameters][39]
+    -   [Examples][40]
+-   [DeleteAction][41]
+    -   [Parameters][42]
+    -   [Examples][43]
+-   [ClearAction][44]
+    -   [Parameters][45]
+    -   [Examples][46]
+-   [ReDrawAction][47]
+    -   [Parameters][48]
+-   [MoveAction][49]
     -   [Parameters][50]
--   [MoveAction][51]
+-   [OldDrawing][51]
     -   [Parameters][52]
--   [OldDrawing][53]
-    -   [Parameters][54]
-    -   [id][55]
-    -   [attrs][56]
-    -   [text][57]
-    -   [type][58]
-    -   [ready][59]
-    -   [defaultAttrs][60]
-    -   [selectedAttrs][61]
-    -   [render][62]
-    -   [getLinkPoint][63]
-    -   [initialize][64]
+    -   [id][53]
+    -   [attrs][54]
+    -   [text][55]
+    -   [type][56]
+    -   [ready][57]
+    -   [defaultAttrs][58]
+    -   [selectedAttrs][59]
+    -   [render][60]
+    -   [getLinkPoint][61]
+    -   [initialize][62]
+        -   [Parameters][63]
+    -   [updateAttrs][64]
         -   [Parameters][65]
-    -   [updateAttrs][66]
-        -   [Parameters][67]
-    -   [select][68]
-    -   [remove][69]
-    -   [toData][70]
-    -   [moveTo][71]
-        -   [Parameters][72]
--   [LineDrawing][73]
-    -   [Parameters][74]
-    -   [defaultAttrs][75]
-    -   [selectedAttrs][76]
--   [CircleDrawing][77]
-    -   [Parameters][78]
-    -   [defaultAttrs][79]
-    -   [selectedAttrs][80]
--   [DotDrawing][81]
-    -   [Parameters][82]
-    -   [defaultAttrs][83]
-    -   [selectedAttrs][84]
--   [RectDrawing][85]
-    -   [Parameters][86]
-    -   [defaultAttrs][87]
-    -   [selectedAttrs][88]
--   [NumberScaleDrawing][89]
+    -   [select][66]
+    -   [remove][67]
+    -   [toData][68]
+    -   [moveTo][69]
+        -   [Parameters][70]
+-   [LineDrawing][71]
+    -   [Parameters][72]
+    -   [defaultAttrs][73]
+    -   [selectedAttrs][74]
+-   [CircleDrawing][75]
+    -   [Parameters][76]
+    -   [defaultAttrs][77]
+    -   [selectedAttrs][78]
+-   [DotDrawing][79]
+    -   [Parameters][80]
+    -   [defaultAttrs][81]
+    -   [selectedAttrs][82]
+-   [RectDrawing][83]
+    -   [Parameters][84]
+    -   [defaultAttrs][85]
+    -   [selectedAttrs][86]
+-   [NumberScaleDrawing][87]
+    -   [Parameters][88]
+-   [ArrowLinkDrawing][89]
     -   [Parameters][90]
--   [ArrowLinkDrawing][91]
-    -   [Parameters][92]
-    -   [getArrowLinkPath][93]
-        -   [Parameters][94]
-    -   [defaultAttrs][95]
-    -   [selectedAttrs][96]
--   [PathDrawing][97]
-    -   [Parameters][98]
-    -   [defaultAttrs][99]
-    -   [selectedAttrs][100]
--   [TextDrawing][101]
-    -   [Parameters][102]
-    -   [defaultAttrs][103]
-    -   [selectedAttrs][104]
--   [TextCircleDrawing][105]
-    -   [Parameters][106]
-    -   [type][107]
-    -   [defaultCircleAttrs][108]
-    -   [circleSelectedAttrs][109]
-    -   [defaultTextAttrs][110]
-    -   [textSelectedAttrs][111]
--   [handlers][112]
--   [setNoneHandler][113]
+    -   [getArrowLinkPath][91]
+        -   [Parameters][92]
+    -   [defaultAttrs][93]
+    -   [selectedAttrs][94]
+-   [PathDrawing][95]
+    -   [Parameters][96]
+    -   [defaultAttrs][97]
+    -   [selectedAttrs][98]
+-   [TextDrawing][99]
+    -   [Parameters][100]
+    -   [defaultAttrs][101]
+    -   [selectedAttrs][102]
+-   [TextCircleDrawing][103]
+    -   [Parameters][104]
+    -   [type][105]
+    -   [defaultCircleAttrs][106]
+    -   [circleSelectedAttrs][107]
+    -   [defaultTextAttrs][108]
+    -   [textSelectedAttrs][109]
+-   [handlers][110]
+-   [setNoneHandler][111]
+    -   [Parameters][112]
+-   [setLineDrawHandler][113]
     -   [Parameters][114]
--   [setLineDrawHandler][115]
+-   [setCircleDrawHandler][115]
     -   [Parameters][116]
--   [setCircleDrawHandler][117]
+-   [setLinkDrawHandler][117]
     -   [Parameters][118]
--   [setLinkDrawHandler][119]
+-   [setArrowLinkDrawHandler][119]
     -   [Parameters][120]
--   [setArrowLinkDrawHandler][121]
+-   [setTextCircleDrawHandler][121]
     -   [Parameters][122]
--   [setTextCircleDrawHandler][123]
+-   [setMoveHandler][123]
     -   [Parameters][124]
--   [setMoveHandler][125]
+-   [D3Graph][125]
     -   [Parameters][126]
--   [D3Graph][127]
-    -   [Parameters][128]
-    -   [getDrawingData][129]
-    -   [getDrawingActions][130]
-    -   [clear][131]
-    -   [propTypes][132]
-        -   [Properties][133]
+    -   [getDrawingData][127]
+    -   [getDrawingActions][128]
+    -   [clear][129]
+    -   [propTypes][130]
+        -   [Properties][131]
+-   [AnchorDrawing][132]
+    -   [Parameters][133]
 -   [onAnchorRender][134]
     -   [Parameters][135]
 -   [offset][136]
@@ -152,140 +152,128 @@
 -   [select][148]
 -   [applyAttrs][149]
 
-## AnchorDrawing
-
-[src/components/AnchorDrawing.js:19-48][150]
-
-**Extends Drawing**
-
-Anchor的位置是相对于所在图形的getPosition来确定的
-
-### Parameters
-
--   `option` **AnchorDrawingOption** 
-
 ## PureComponent
 
-[src/components/D3Graph.js:10-10][151]
+[src/components/D3Graph.js:10-10][150]
 
 ## DrawingOptionType
 
-[src/components/D3Graph.js:35-38][152]
+[src/components/D3Graph.js:35-38][151]
 
-Type: {type: $Values&lt;any>, option: [Object][153]}
+Type: {type: $Values&lt;any>, option: [Object][152]}
 
 ### Properties
 
 -   `type` **$Values&lt;any>** 
--   `option` **[Object][153]** 
+-   `option` **[Object][152]** 
 
 ## ActionOptionType
 
-[src/components/D3Graph.js:42-46][154]
+[src/components/D3Graph.js:42-46][153]
 
-Type: {type: [string][155], params: [Array][156], ops: [Object][153]?}
+Type: {type: [string][154], params: [Array][155], ops: [Object][152]?}
 
 ### Properties
 
--   `type` **[string][155]** 
--   `params` **[Array][156]** 
--   `ops` **[Object][153]?** 
+-   `type` **[string][154]** 
+-   `params` **[Array][155]** 
+-   `ops` **[Object][152]?** 
 
 ## ActionTypeEnums
 
-[src/components/D3Graph.js:54-74][157]
+[src/components/D3Graph.js:54-74][156]
 
 action枚举
 
 ### draw
 
-[src/components/D3Graph.js:56-56][158]
+[src/components/D3Graph.js:56-56][157]
 
 绘画
 
 ### redraw
 
-[src/components/D3Graph.js:58-58][159]
+[src/components/D3Graph.js:58-58][158]
 
 重绘/更新
 
 ### select
 
-[src/components/D3Graph.js:60-60][160]
+[src/components/D3Graph.js:60-60][159]
 
 选择
 
 ### unselect
 
-[src/components/D3Graph.js:62-62][161]
+[src/components/D3Graph.js:62-62][160]
 
 反选
 
 ### delete
 
-[src/components/D3Graph.js:64-64][162]
+[src/components/D3Graph.js:64-64][161]
 
 删除
 
 ### clear
 
-[src/components/D3Graph.js:66-66][163]
+[src/components/D3Graph.js:66-66][162]
 
 清除所有图形
 
 ### move
 
-[src/components/D3Graph.js:68-68][164]
+[src/components/D3Graph.js:68-68][163]
 
 移动
 
 ### input
 
-[src/components/D3Graph.js:73-73][165]
+[src/components/D3Graph.js:73-73][164]
 
 输入
 
 ## selectModeEnums
 
-[src/components/D3Graph.js:83-86][166]
+[src/components/D3Graph.js:83-86][165]
 
 选择模式枚举
 
 ### Properties
 
--   `single` **[string][155]** 单选
--   `multiple` **[string][155]** 多选
+-   `single` **[string][154]** 单选
+-   `multiple` **[string][154]** 多选
 
 ## registerDrawing
 
-[src/components/D3Graph.js:111-113][167]
+[src/components/D3Graph.js:111-113][166]
 
 注册Drawing绘制类
 
 ### Parameters
 
--   `name` **[String][155]** name值必须和绘图类的类名保持一致
--   `drawing` **[Function][168]** 绘图类
+-   `name` **[String][154]** name值必须和绘图类的类名保持一致
+-   `drawing` **[Function][167]** 绘图类
 
 ## fromDrawing
 
-[src/components/D3Graph.js:180-183][169]
+[src/components/D3Graph.js:180-183][168]
 
 反序列化drawing
 
 ### Parameters
 
--   `drawingOps` **[DrawingOptionType][170]** 
+-   `drawingOps` **[DrawingOptionType][169]** 
 
 ## fromActions
 
-[src/components/D3Graph.js:211-228][171]
+[src/components/D3Graph.js:211-228][170]
 
 反序列化actions
 
 ### Parameters
 
--   `actions` **[Array][156]&lt;[ActionOptionType][172]>** 
+-   `actions` **[Array][155]&lt;[ActionOptionType][171]>** 
 
 ### Examples
 
@@ -313,7 +301,7 @@ const actions=fromActions([{
 
 ## Action
 
-[src/components/D3Graph.js:241-271][173]
+[src/components/D3Graph.js:241-271][172]
 
 action基类
 
@@ -325,39 +313,39 @@ action基类
 
 ### type
 
-[src/components/D3Graph.js:247-247][174]
+[src/components/D3Graph.js:247-247][173]
 
 action的类型,是一个枚举值
 
-Type: [ActionTypeEnums][175]
+Type: [ActionTypeEnums][174]
 
 ### params
 
-[src/components/D3Graph.js:252-252][176]
+[src/components/D3Graph.js:252-252][175]
 
 action的参数
 
-Type: [Array][156]
+Type: [Array][155]
 
 ### nextInterval
 
-[src/components/D3Graph.js:257-257][177]
+[src/components/D3Graph.js:257-257][176]
 
 playing模式执行下一步时的时间间隔,默认没有
 
-Type: [Number][178]?
+Type: [Number][177]?
 
 ### canBreak
 
-[src/components/D3Graph.js:262-262][179]
+[src/components/D3Graph.js:262-262][178]
 
 是否允许中断操作
 
-Type: [boolean][180]
+Type: [boolean][179]
 
 ## InputAction
 
-[src/components/D3Graph.js:276-289][181]
+[src/components/D3Graph.js:276-289][180]
 
 **Extends Action**
 
@@ -365,12 +353,12 @@ Type: [boolean][180]
 
 ### Parameters
 
--   `params` **[Array][156]** 
--   `ops` **[Object][153]?** 
+-   `params` **[Array][155]** 
+-   `ops` **[Object][152]?** 
 
 ## DrawAction
 
-[src/components/D3Graph.js:304-308][182]
+[src/components/D3Graph.js:304-308][181]
 
 **Extends Action**
 
@@ -392,7 +380,7 @@ Type: [boolean][180]
 
 ## SelectAction
 
-[src/components/D3Graph.js:320-324][183]
+[src/components/D3Graph.js:320-324][182]
 
 **Extends Action**
 
@@ -411,7 +399,7 @@ Type: [boolean][180]
 
 ## UnSelectAction
 
-[src/components/D3Graph.js:336-340][184]
+[src/components/D3Graph.js:336-340][183]
 
 **Extends Action**
 
@@ -430,7 +418,7 @@ Type: [boolean][180]
 
 ## DeleteAction
 
-[src/components/D3Graph.js:352-356][185]
+[src/components/D3Graph.js:352-356][184]
 
 **Extends Action**
 
@@ -449,7 +437,7 @@ Type: [boolean][180]
 
 ## ClearAction
 
-[src/components/D3Graph.js:368-372][186]
+[src/components/D3Graph.js:368-372][185]
 
 **Extends Action**
 
@@ -467,7 +455,7 @@ Type: [boolean][180]
 
 ## ReDrawAction
 
-[src/components/D3Graph.js:380-387][187]
+[src/components/D3Graph.js:380-387][186]
 
 **Extends Action**
 
@@ -481,7 +469,7 @@ Type: [boolean][180]
 
 ## MoveAction
 
-[src/components/D3Graph.js:394-406][188]
+[src/components/D3Graph.js:394-406][187]
 
 **Extends Action**
 
@@ -489,90 +477,90 @@ Type: [boolean][180]
 
 ### Parameters
 
--   `shapeId` **[string][155]** 需要移动的图形的id
--   `vec` **[object][153]** 位移
+-   `shapeId` **[string][154]** 需要移动的图形的id
+-   `vec` **[object][152]** 位移
 
 ## OldDrawing
 
-[src/components/D3Graph.js:417-610][189]
+[src/components/D3Graph.js:417-610][188]
 
 绘画接口,所有的绘画类都需要继承这个类并实现相关方法
 
 ### Parameters
 
--   `option` **[Object][153]** 
+-   `option` **[Object][152]** 
 
 ### id
 
-[src/components/D3Graph.js:433-433][190]
+[src/components/D3Graph.js:433-433][189]
 
 图形的id,如果没有提供会生成一个guid
 
-Type: [String][155]
+Type: [String][154]
 
 ### attrs
 
-[src/components/D3Graph.js:438-438][191]
+[src/components/D3Graph.js:438-438][190]
 
 图形的attrs
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### text
 
-[src/components/D3Graph.js:443-443][192]
+[src/components/D3Graph.js:443-443][191]
 
 对应svg元素的text
 
-Type: ([String][155] \| [Function][168])
+Type: ([String][154] \| [Function][167])
 
 ### type
 
-[src/components/D3Graph.js:454-454][193]
+[src/components/D3Graph.js:454-454][192]
 
 绘图的类型
 
-Type: [String][155]
+Type: [String][154]
 
 ### ready
 
-[src/components/D3Graph.js:466-466][194]
+[src/components/D3Graph.js:466-466][193]
 
 是否已经初始化
 
-Type: [Boolean][180]
+Type: [Boolean][179]
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:480-482][195]
+[src/components/D3Graph.js:480-482][194]
 
 默认的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:489-491][196]
+[src/components/D3Graph.js:489-491][195]
 
 选中时的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### render
 
-[src/components/D3Graph.js:496-502][197]
+[src/components/D3Graph.js:496-502][196]
 
 绘制,更新selection相关
 
 ### getLinkPoint
 
-[src/components/D3Graph.js:507-509][198]
+[src/components/D3Graph.js:507-509][197]
 
 获取link的点的位置信息
 
 ### initialize
 
-[src/components/D3Graph.js:514-517][199]
+[src/components/D3Graph.js:514-517][198]
 
 初始化drawing,创建selection,监听事件需要在里面实现
 
@@ -582,7 +570,7 @@ Type: [Object][153]
 
 ### updateAttrs
 
-[src/components/D3Graph.js:522-530][200]
+[src/components/D3Graph.js:522-530][199]
 
 批量更新attrs
 
@@ -593,27 +581,27 @@ Type: [Object][153]
 
 ### select
 
-[src/components/D3Graph.js:535-541][201]
+[src/components/D3Graph.js:535-541][200]
 
 选中当前图形
 
 ### remove
 
-[src/components/D3Graph.js:546-551][202]
+[src/components/D3Graph.js:546-551][201]
 
 删除图形
 
 ### toData
 
-[src/components/D3Graph.js:592-601][203]
+[src/components/D3Graph.js:592-601][202]
 
 将图形数据序列化
 
-Returns **{type: [String][155], id: [String][155], attrs: [Object][153], text: ([String][155] \| [Function][168])}** 
+Returns **{type: [String][154], id: [String][154], attrs: [Object][152], text: ([String][154] \| [Function][167])}** 
 
 ### moveTo
 
-[src/components/D3Graph.js:607-609][204]
+[src/components/D3Graph.js:607-609][203]
 
 移动图形到目标位置
 
@@ -624,7 +612,7 @@ Returns **{type: [String][155], id: [String][155], attrs: [Object][153], text: (
 
 ## LineDrawing
 
-[src/components/D3Graph.js:615-685][205]
+[src/components/D3Graph.js:615-685][204]
 
 **Extends OldDrawing**
 
@@ -636,23 +624,23 @@ Returns **{type: [String][155], id: [String][155], attrs: [Object][153], text: (
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:621-625][206]
+[src/components/D3Graph.js:621-625][205]
 
 线的默认attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:631-633][207]
+[src/components/D3Graph.js:631-633][206]
 
 线选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## CircleDrawing
 
-[src/components/D3Graph.js:692-751][208]
+[src/components/D3Graph.js:692-751][207]
 
 **Extends OldDrawing**
 
@@ -664,23 +652,23 @@ Type: [Object][153]
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:698-703][209]
+[src/components/D3Graph.js:698-703][208]
 
 圈的默认attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:709-711][210]
+[src/components/D3Graph.js:709-711][209]
 
 圈选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## DotDrawing
 
-[src/components/D3Graph.js:758-806][211]
+[src/components/D3Graph.js:758-806][210]
 
 **Extends OldDrawing**
 
@@ -692,23 +680,23 @@ Type: [Object][153]
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:764-768][212]
+[src/components/D3Graph.js:764-768][211]
 
 点默认的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:774-776][213]
+[src/components/D3Graph.js:774-776][212]
 
 点选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## RectDrawing
 
-[src/components/D3Graph.js:813-844][214]
+[src/components/D3Graph.js:813-844][213]
 
 **Extends OldDrawing**
 
@@ -720,23 +708,23 @@ Type: [Object][153]
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:819-819][215]
+[src/components/D3Graph.js:819-819][214]
 
 矩形默认的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:825-825][216]
+[src/components/D3Graph.js:825-825][215]
 
 矩形选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## NumberScaleDrawing
 
-[src/components/D3Graph.js:851-964][217]
+[src/components/D3Graph.js:851-964][216]
 
 **Extends OldDrawing**
 
@@ -744,11 +732,11 @@ Type: [Object][153]
 
 ### Parameters
 
--   `option` **[object][153]?** 
+-   `option` **[object][152]?** 
 
 ## ArrowLinkDrawing
 
-[src/components/D3Graph.js:972-1155][218]
+[src/components/D3Graph.js:972-1155][217]
 
 **Extends OldDrawing**
 
@@ -756,11 +744,11 @@ Type: [Object][153]
 
 ### Parameters
 
--   `option` **[object][153]** 
+-   `option` **[object][152]** 
 
 ### getArrowLinkPath
 
-[src/components/D3Graph.js:1110-1140][219]
+[src/components/D3Graph.js:1110-1140][218]
 
 获取箭头链接的路径
 
@@ -770,27 +758,27 @@ Type: [Object][153]
 -   `endPoint`  结束点
 -   `distance`  箭头的长度,长度越短箭头越小
 
-Returns **[Array][156]&lt;[string][155]>** 
+Returns **[Array][155]&lt;[string][154]>** 
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:978-981][220]
+[src/components/D3Graph.js:978-981][219]
 
 带箭头link的默认attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:987-989][221]
+[src/components/D3Graph.js:987-989][220]
 
 带箭头link的选中attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## PathDrawing
 
-[src/components/D3Graph.js:1314-1360][222]
+[src/components/D3Graph.js:1314-1360][221]
 
 **Extends OldDrawing**
 
@@ -802,23 +790,23 @@ Type: [Object][153]
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:1320-1320][223]
+[src/components/D3Graph.js:1320-1320][222]
 
 path默认的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:1326-1326][224]
+[src/components/D3Graph.js:1326-1326][223]
 
 path选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## TextDrawing
 
-[src/components/D3Graph.js:1367-1413][225]
+[src/components/D3Graph.js:1367-1413][224]
 
 **Extends OldDrawing**
 
@@ -830,23 +818,23 @@ Type: [Object][153]
 
 ### defaultAttrs
 
-[src/components/D3Graph.js:1373-1376][226]
+[src/components/D3Graph.js:1373-1376][225]
 
 文本默认的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### selectedAttrs
 
-[src/components/D3Graph.js:1382-1384][227]
+[src/components/D3Graph.js:1382-1384][226]
 
 文本选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## TextCircleDrawing
 
-[src/components/D3Graph.js:1420-1583][228]
+[src/components/D3Graph.js:1420-1583][227]
 
 **Extends OldDrawing**
 
@@ -854,51 +842,51 @@ Type: [Object][153]
 
 ### Parameters
 
--   `option` **[Object][153]** 绘制的选项
+-   `option` **[Object][152]** 绘制的选项
 
 ### type
 
-[src/components/D3Graph.js:1496-1496][229]
+[src/components/D3Graph.js:1496-1496][228]
 
 绘制的类型
 
-Type: [String][155]
+Type: [String][154]
 
 ### defaultCircleAttrs
 
-[src/components/D3Graph.js:1426-1430][230]
+[src/components/D3Graph.js:1426-1430][229]
 
 圈的默认attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### circleSelectedAttrs
 
-[src/components/D3Graph.js:1436-1439][231]
+[src/components/D3Graph.js:1436-1439][230]
 
 圈的选中attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### defaultTextAttrs
 
-[src/components/D3Graph.js:1445-1449][232]
+[src/components/D3Graph.js:1445-1449][231]
 
 文本的默认attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ### textSelectedAttrs
 
-[src/components/D3Graph.js:1455-1457][233]
+[src/components/D3Graph.js:1455-1457][232]
 
 文本选中的attribute
 
-Type: [Object][153]
+Type: [Object][152]
 
 ## handlers
 
-[src/components/D3Graph.js:1717-1931][234]
+[src/components/D3Graph.js:1717-1931][233]
 
 Toolbar的handler
 
@@ -906,7 +894,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setNoneHandler
 
-[src/components/D3Graph.js:1722-1739][235]
+[src/components/D3Graph.js:1722-1739][234]
 
 移除到画布的所有操作
 
@@ -916,7 +904,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setLineDrawHandler
 
-[src/components/D3Graph.js:1744-1784][236]
+[src/components/D3Graph.js:1744-1784][235]
 
 画线
 
@@ -926,7 +914,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setCircleDrawHandler
 
-[src/components/D3Graph.js:1789-1807][237]
+[src/components/D3Graph.js:1789-1807][236]
 
 画圈
 
@@ -936,7 +924,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setLinkDrawHandler
 
-[src/components/D3Graph.js:1812-1831][238]
+[src/components/D3Graph.js:1812-1831][237]
 
 画link
 
@@ -946,7 +934,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setArrowLinkDrawHandler
 
-[src/components/D3Graph.js:1836-1855][239]
+[src/components/D3Graph.js:1836-1855][238]
 
 画带箭头的link
 
@@ -956,7 +944,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setTextCircleDrawHandler
 
-[src/components/D3Graph.js:1860-1879][240]
+[src/components/D3Graph.js:1860-1879][239]
 
 画带圈的文本
 
@@ -966,7 +954,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## setMoveHandler
 
-[src/components/D3Graph.js:1884-1930][241]
+[src/components/D3Graph.js:1884-1930][240]
 
 移动
 
@@ -976,7 +964,7 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ## D3Graph
 
-[src/components/D3Graph.js:2168-2666][242]
+[src/components/D3Graph.js:2168-2666][241]
 
 **Extends Component**
 
@@ -988,11 +976,11 @@ Type: {setNoneHandler: DrawingToolbar.handlers.setNoneHandler, setLineDrawHandle
 
 ### getDrawingData
 
-[src/components/D3Graph.js:2520-2530][243]
+[src/components/D3Graph.js:2520-2530][242]
 
 获取图形数据
 
-Returns **[Array][156]&lt;any>** 
+Returns **[Array][155]&lt;any>** 
 
 **Meta**
 
@@ -1001,38 +989,50 @@ Returns **[Array][156]&lt;any>**
 
 ### getDrawingActions
 
-[src/components/D3Graph.js:2536-2545][244]
+[src/components/D3Graph.js:2536-2545][243]
 
 获取所有绘图的action
 
-Returns **[Array][156]&lt;any>** 
+Returns **[Array][155]&lt;any>** 
 
 ### clear
 
-[src/components/D3Graph.js:2550-2555][245]
+[src/components/D3Graph.js:2550-2555][244]
 
 清除画布,这个方法除了会把画布上的内容清除以外还会重置内部的action状态
 
 ### propTypes
 
-[src/components/D3Graph.js:2181-2218][246]
+[src/components/D3Graph.js:2181-2218][245]
 
 #### Properties
 
--   `attrs` **[object][153]** svg的属性
--   `actions` **[Array][156]** 所有的操作
+-   `attrs` **[object][152]** svg的属性
+-   `actions` **[Array][155]** 所有的操作
 -   `selectMode` **(single | multiple)** [single] - 选择模式,是多选还是单选
--   `original` **[object][153]** 坐标原点(屏幕坐标),默认值{x:0,y:0}
--   `coordinateType` **([screen][247] \| [math][248])** [screen] - 坐标系,默认值是屏幕坐标系
+-   `original` **[object][152]** 坐标原点(屏幕坐标),默认值{x:0,y:0}
+-   `coordinateType` **([screen][246] \| [math][247])** [screen] - 坐标系,默认值是屏幕坐标系
 -   `mode` **(none | playing)** 模式,默认是:none,如果是playing,则是样式模式,会一步一步的演示绘图过程
--   `renderToolbar` **[Function][168]** 绘图的工具栏
--   `scale` **[Number][178]?** [1] - 缩放比例,默认是1(1个单位对应一个像素)
--   `interval` **[Number][178]?** [1] - action的执行时间间隔
--   `onAction` **[Function][168]?** [null] - action的回调函数,函数包含一个参数 action
+-   `renderToolbar` **[Function][167]** 绘图的工具栏
+-   `scale` **[Number][177]?** [1] - 缩放比例,默认是1(1个单位对应一个像素)
+-   `interval` **[Number][177]?** [1] - action的执行时间间隔
+-   `onAction` **[Function][167]?** [null] - action的回调函数,函数包含一个参数 action
+
+## AnchorDrawing
+
+[src/components/drawing/AnchorDrawing.js:19-48][248]
+
+**Extends Drawing**
+
+Anchor的位置是相对于所在图形的getPosition来确定的
+
+### Parameters
+
+-   `option` **AnchorDrawingOption** 
 
 ## onAnchorRender
 
-[src/components/LinkDrawing.js:32-34][249]
+[src/components/drawing/LinkDrawing.js:72-74][249]
 
 当anchor
 
@@ -1048,347 +1048,347 @@ Anchor的相对位置,基于所在图形的getPosition来确定真实的位置
 
 ## from
 
-[src/components/Types.js:31-31][251]
+[src/components/Types.js:33-33][251]
 
 需要连接的图形的ID和anchor ID
 
 ## to
 
-[src/components/Types.js:35-35][252]
+[src/components/Types.js:37-37][252]
 
 需要连接的图形的ID
 
 ## moveTo
 
-[src/components/Types.js:44-44][253]
+[src/components/Types.js:47-47][253]
 
 必须是function,不能使用箭头函数
 
 ## text
 
-[src/components/Types.js:54-54][254]
+[src/components/Types.js:57-57][254]
 
 文本内容
 
 ## attrs
 
-[src/components/Types.js:58-58][255]
+[src/components/Types.js:61-61][255]
 
 属性,标准的svg属性
 
 ## selectedAttrs
 
-[src/components/Types.js:62-62][256]
+[src/components/Types.js:65-65][256]
 
 选中的属性,标准的svg属性
 
 ## selection
 
-[src/components/Types.js:66-66][257]
+[src/components/Types.js:69-69][257]
 
 D3.Selection
 
 ## type
 
-[src/components/Types.js:70-70][258]
+[src/components/Types.js:73-73][258]
 
 图形的类型
 
 ## ready
 
-[src/components/Types.js:74-74][259]
+[src/components/Types.js:77-77][259]
 
 是否已经初始化
 
 ## selected
 
-[src/components/Types.js:78-78][260]
+[src/components/Types.js:81-81][260]
 
 图形是否被选中
 
 ## anchors
 
-[src/components/Types.js:82-82][261]
+[src/components/Types.js:85-85][261]
 
 anchors
 
 ## select
 
-[src/components/Types.js:87-87][262]
+[src/components/Types.js:91-91][262]
 
 绘制图形
 
 ## applyAttrs
 
-[src/components/Types.js:91-91][263]
+[src/components/Types.js:96-96][263]
 
 设置svg的属性
 
-[1]: #anchordrawing
+[1]: #purecomponent
 
-[2]: #parameters
+[2]: #drawingoptiontype
 
-[3]: #purecomponent
+[3]: #properties
 
-[4]: #drawingoptiontype
+[4]: #actionoptiontype
 
-[5]: #properties
+[5]: #properties-1
 
-[6]: #actionoptiontype
+[6]: #actiontypeenums
 
-[7]: #properties-1
+[7]: #draw
 
-[8]: #actiontypeenums
+[8]: #redraw
 
-[9]: #draw
+[9]: #select
 
-[10]: #redraw
+[10]: #unselect
 
-[11]: #select
+[11]: #delete
 
-[12]: #unselect
+[12]: #clear
 
-[13]: #delete
+[13]: #move
 
-[14]: #clear
+[14]: #input
 
-[15]: #move
+[15]: #selectmodeenums
 
-[16]: #input
+[16]: #properties-2
 
-[17]: #selectmodeenums
+[17]: #registerdrawing
 
-[18]: #properties-2
+[18]: #parameters
 
-[19]: #registerdrawing
+[19]: #fromdrawing
 
 [20]: #parameters-1
 
-[21]: #fromdrawing
+[21]: #fromactions
 
 [22]: #parameters-2
 
-[23]: #fromactions
+[23]: #examples
 
-[24]: #parameters-3
+[24]: #action
 
-[25]: #examples
+[25]: #parameters-3
 
-[26]: #action
+[26]: #type
 
-[27]: #parameters-4
+[27]: #params
 
-[28]: #type
+[28]: #nextinterval
 
-[29]: #params
+[29]: #canbreak
 
-[30]: #nextinterval
+[30]: #inputaction
 
-[31]: #canbreak
+[31]: #parameters-4
 
-[32]: #inputaction
+[32]: #drawaction
 
 [33]: #parameters-5
 
-[34]: #drawaction
+[34]: #examples-1
 
-[35]: #parameters-6
+[35]: #selectaction
 
-[36]: #examples-1
+[36]: #parameters-6
 
-[37]: #selectaction
+[37]: #examples-2
 
-[38]: #parameters-7
+[38]: #unselectaction
 
-[39]: #examples-2
+[39]: #parameters-7
 
-[40]: #unselectaction
+[40]: #examples-3
 
-[41]: #parameters-8
+[41]: #deleteaction
 
-[42]: #examples-3
+[42]: #parameters-8
 
-[43]: #deleteaction
+[43]: #examples-4
 
-[44]: #parameters-9
+[44]: #clearaction
 
-[45]: #examples-4
+[45]: #parameters-9
 
-[46]: #clearaction
+[46]: #examples-5
 
-[47]: #parameters-10
+[47]: #redrawaction
 
-[48]: #examples-5
+[48]: #parameters-10
 
-[49]: #redrawaction
+[49]: #moveaction
 
 [50]: #parameters-11
 
-[51]: #moveaction
+[51]: #olddrawing
 
 [52]: #parameters-12
 
-[53]: #olddrawing
+[53]: #id
 
-[54]: #parameters-13
+[54]: #attrs
 
-[55]: #id
+[55]: #text
 
-[56]: #attrs
+[56]: #type-1
 
-[57]: #text
+[57]: #ready
 
-[58]: #type-1
+[58]: #defaultattrs
 
-[59]: #ready
+[59]: #selectedattrs
 
-[60]: #defaultattrs
+[60]: #render
 
-[61]: #selectedattrs
+[61]: #getlinkpoint
 
-[62]: #render
+[62]: #initialize
 
-[63]: #getlinkpoint
+[63]: #parameters-13
 
-[64]: #initialize
+[64]: #updateattrs
 
 [65]: #parameters-14
 
-[66]: #updateattrs
+[66]: #select-1
 
-[67]: #parameters-15
+[67]: #remove
 
-[68]: #select-1
+[68]: #todata
 
-[69]: #remove
+[69]: #moveto
 
-[70]: #todata
+[70]: #parameters-15
 
-[71]: #moveto
+[71]: #linedrawing
 
 [72]: #parameters-16
 
-[73]: #linedrawing
+[73]: #defaultattrs-1
 
-[74]: #parameters-17
+[74]: #selectedattrs-1
 
-[75]: #defaultattrs-1
+[75]: #circledrawing
 
-[76]: #selectedattrs-1
+[76]: #parameters-17
 
-[77]: #circledrawing
+[77]: #defaultattrs-2
 
-[78]: #parameters-18
+[78]: #selectedattrs-2
 
-[79]: #defaultattrs-2
+[79]: #dotdrawing
 
-[80]: #selectedattrs-2
+[80]: #parameters-18
 
-[81]: #dotdrawing
+[81]: #defaultattrs-3
 
-[82]: #parameters-19
+[82]: #selectedattrs-3
 
-[83]: #defaultattrs-3
+[83]: #rectdrawing
 
-[84]: #selectedattrs-3
+[84]: #parameters-19
 
-[85]: #rectdrawing
+[85]: #defaultattrs-4
 
-[86]: #parameters-20
+[86]: #selectedattrs-4
 
-[87]: #defaultattrs-4
+[87]: #numberscaledrawing
 
-[88]: #selectedattrs-4
+[88]: #parameters-20
 
-[89]: #numberscaledrawing
+[89]: #arrowlinkdrawing
 
 [90]: #parameters-21
 
-[91]: #arrowlinkdrawing
+[91]: #getarrowlinkpath
 
 [92]: #parameters-22
 
-[93]: #getarrowlinkpath
+[93]: #defaultattrs-5
 
-[94]: #parameters-23
+[94]: #selectedattrs-5
 
-[95]: #defaultattrs-5
+[95]: #pathdrawing
 
-[96]: #selectedattrs-5
+[96]: #parameters-23
 
-[97]: #pathdrawing
+[97]: #defaultattrs-6
 
-[98]: #parameters-24
+[98]: #selectedattrs-6
 
-[99]: #defaultattrs-6
+[99]: #textdrawing
 
-[100]: #selectedattrs-6
+[100]: #parameters-24
 
-[101]: #textdrawing
+[101]: #defaultattrs-7
 
-[102]: #parameters-25
+[102]: #selectedattrs-7
 
-[103]: #defaultattrs-7
+[103]: #textcircledrawing
 
-[104]: #selectedattrs-7
+[104]: #parameters-25
 
-[105]: #textcircledrawing
+[105]: #type-2
 
-[106]: #parameters-26
+[106]: #defaultcircleattrs
 
-[107]: #type-2
+[107]: #circleselectedattrs
 
-[108]: #defaultcircleattrs
+[108]: #defaulttextattrs
 
-[109]: #circleselectedattrs
+[109]: #textselectedattrs
 
-[110]: #defaulttextattrs
+[110]: #handlers
 
-[111]: #textselectedattrs
+[111]: #setnonehandler
 
-[112]: #handlers
+[112]: #parameters-26
 
-[113]: #setnonehandler
+[113]: #setlinedrawhandler
 
 [114]: #parameters-27
 
-[115]: #setlinedrawhandler
+[115]: #setcircledrawhandler
 
 [116]: #parameters-28
 
-[117]: #setcircledrawhandler
+[117]: #setlinkdrawhandler
 
 [118]: #parameters-29
 
-[119]: #setlinkdrawhandler
+[119]: #setarrowlinkdrawhandler
 
 [120]: #parameters-30
 
-[121]: #setarrowlinkdrawhandler
+[121]: #settextcircledrawhandler
 
 [122]: #parameters-31
 
-[123]: #settextcircledrawhandler
+[123]: #setmovehandler
 
 [124]: #parameters-32
 
-[125]: #setmovehandler
+[125]: #d3graph
 
 [126]: #parameters-33
 
-[127]: #d3graph
+[127]: #getdrawingdata
 
-[128]: #parameters-34
+[128]: #getdrawingactions
 
-[129]: #getdrawingdata
+[129]: #clear-1
 
-[130]: #getdrawingactions
+[130]: #proptypes
 
-[131]: #clear-1
+[131]: #properties-3
 
-[132]: #proptypes
+[132]: #anchordrawing
 
-[133]: #properties-3
+[133]: #parameters-34
 
 [134]: #onanchorrender
 
@@ -1422,230 +1422,230 @@ anchors
 
 [149]: #applyattrs
 
-[150]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/AnchorDrawing.js#L19-L48 "Source code on GitHub"
+[150]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L10-L10 "Source code on GitHub"
 
-[151]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L10-L10 "Source code on GitHub"
+[151]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L32-L34 "Source code on GitHub"
 
-[152]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L32-L34 "Source code on GitHub"
+[152]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[153]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[153]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L39-L41 "Source code on GitHub"
 
-[154]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L39-L41 "Source code on GitHub"
+[154]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[155]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[155]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[156]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[156]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L54-L74 "Source code on GitHub"
 
-[157]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L54-L74 "Source code on GitHub"
+[157]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L56-L56 "Source code on GitHub"
 
-[158]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L56-L56 "Source code on GitHub"
+[158]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L58-L58 "Source code on GitHub"
 
-[159]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L58-L58 "Source code on GitHub"
+[159]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L60-L60 "Source code on GitHub"
 
-[160]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L60-L60 "Source code on GitHub"
+[160]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L62-L62 "Source code on GitHub"
 
-[161]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L62-L62 "Source code on GitHub"
+[161]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L64-L64 "Source code on GitHub"
 
-[162]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L64-L64 "Source code on GitHub"
+[162]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L66-L66 "Source code on GitHub"
 
-[163]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L66-L66 "Source code on GitHub"
+[163]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L68-L68 "Source code on GitHub"
 
-[164]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L68-L68 "Source code on GitHub"
+[164]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L73-L73 "Source code on GitHub"
 
-[165]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L73-L73 "Source code on GitHub"
+[165]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L83-L86 "Source code on GitHub"
 
-[166]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L83-L86 "Source code on GitHub"
+[166]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L111-L113 "Source code on GitHub"
 
-[167]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L111-L113 "Source code on GitHub"
+[167]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
-[168]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[168]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L180-L183 "Source code on GitHub"
 
-[169]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L180-L183 "Source code on GitHub"
+[169]: #drawingoptiontype
 
-[170]: #drawingoptiontype
+[170]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L211-L228 "Source code on GitHub"
 
-[171]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L211-L228 "Source code on GitHub"
+[171]: #actionoptiontype
 
-[172]: #actionoptiontype
+[172]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L241-L271 "Source code on GitHub"
 
-[173]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L241-L271 "Source code on GitHub"
+[173]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L247-L247 "Source code on GitHub"
 
-[174]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L247-L247 "Source code on GitHub"
+[174]: #actiontypeenums
 
-[175]: #actiontypeenums
+[175]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L252-L252 "Source code on GitHub"
 
-[176]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L252-L252 "Source code on GitHub"
+[176]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L257-L257 "Source code on GitHub"
 
-[177]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L257-L257 "Source code on GitHub"
+[177]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[178]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[178]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L262-L262 "Source code on GitHub"
 
-[179]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L262-L262 "Source code on GitHub"
+[179]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[180]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[180]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L276-L289 "Source code on GitHub"
 
-[181]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L276-L289 "Source code on GitHub"
+[181]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L304-L308 "Source code on GitHub"
 
-[182]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L304-L308 "Source code on GitHub"
+[182]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L320-L324 "Source code on GitHub"
 
-[183]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L320-L324 "Source code on GitHub"
+[183]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L336-L340 "Source code on GitHub"
 
-[184]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L336-L340 "Source code on GitHub"
+[184]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L352-L356 "Source code on GitHub"
 
-[185]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L352-L356 "Source code on GitHub"
+[185]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L368-L372 "Source code on GitHub"
 
-[186]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L368-L372 "Source code on GitHub"
+[186]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L380-L387 "Source code on GitHub"
 
-[187]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L380-L387 "Source code on GitHub"
+[187]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L394-L406 "Source code on GitHub"
 
-[188]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L394-L406 "Source code on GitHub"
+[188]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L417-L610 "Source code on GitHub"
 
-[189]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L417-L610 "Source code on GitHub"
+[189]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L433-L433 "Source code on GitHub"
 
-[190]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L433-L433 "Source code on GitHub"
+[190]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L438-L438 "Source code on GitHub"
 
-[191]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L438-L438 "Source code on GitHub"
+[191]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L443-L443 "Source code on GitHub"
 
-[192]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L443-L443 "Source code on GitHub"
+[192]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L454-L454 "Source code on GitHub"
 
-[193]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L454-L454 "Source code on GitHub"
+[193]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L466-L466 "Source code on GitHub"
 
-[194]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L466-L466 "Source code on GitHub"
+[194]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L480-L482 "Source code on GitHub"
 
-[195]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L480-L482 "Source code on GitHub"
+[195]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L489-L491 "Source code on GitHub"
 
-[196]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L489-L491 "Source code on GitHub"
+[196]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L496-L502 "Source code on GitHub"
 
-[197]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L496-L502 "Source code on GitHub"
+[197]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L507-L509 "Source code on GitHub"
 
-[198]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L507-L509 "Source code on GitHub"
+[198]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L514-L517 "Source code on GitHub"
 
-[199]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L514-L517 "Source code on GitHub"
+[199]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L522-L530 "Source code on GitHub"
 
-[200]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L522-L530 "Source code on GitHub"
+[200]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L535-L541 "Source code on GitHub"
 
-[201]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L535-L541 "Source code on GitHub"
+[201]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L546-L551 "Source code on GitHub"
 
-[202]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L546-L551 "Source code on GitHub"
+[202]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L592-L601 "Source code on GitHub"
 
-[203]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L592-L601 "Source code on GitHub"
+[203]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L607-L609 "Source code on GitHub"
 
-[204]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L607-L609 "Source code on GitHub"
+[204]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L615-L685 "Source code on GitHub"
 
-[205]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L615-L685 "Source code on GitHub"
+[205]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L621-L625 "Source code on GitHub"
 
-[206]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L621-L625 "Source code on GitHub"
+[206]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L631-L633 "Source code on GitHub"
 
-[207]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L631-L633 "Source code on GitHub"
+[207]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L692-L751 "Source code on GitHub"
 
-[208]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L692-L751 "Source code on GitHub"
+[208]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L698-L703 "Source code on GitHub"
 
-[209]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L698-L703 "Source code on GitHub"
+[209]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L709-L711 "Source code on GitHub"
 
-[210]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L709-L711 "Source code on GitHub"
+[210]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L758-L806 "Source code on GitHub"
 
-[211]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L758-L806 "Source code on GitHub"
+[211]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L764-L768 "Source code on GitHub"
 
-[212]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L764-L768 "Source code on GitHub"
+[212]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L774-L776 "Source code on GitHub"
 
-[213]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L774-L776 "Source code on GitHub"
+[213]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L813-L844 "Source code on GitHub"
 
-[214]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L813-L844 "Source code on GitHub"
+[214]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L819-L819 "Source code on GitHub"
 
-[215]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L819-L819 "Source code on GitHub"
+[215]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L825-L825 "Source code on GitHub"
 
-[216]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L825-L825 "Source code on GitHub"
+[216]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L851-L964 "Source code on GitHub"
 
-[217]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L851-L964 "Source code on GitHub"
+[217]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L972-L1155 "Source code on GitHub"
 
-[218]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L972-L1155 "Source code on GitHub"
+[218]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1110-L1140 "Source code on GitHub"
 
-[219]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1110-L1140 "Source code on GitHub"
+[219]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L978-L981 "Source code on GitHub"
 
-[220]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L978-L981 "Source code on GitHub"
+[220]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L987-L989 "Source code on GitHub"
 
-[221]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L987-L989 "Source code on GitHub"
+[221]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1314-L1360 "Source code on GitHub"
 
-[222]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1314-L1360 "Source code on GitHub"
+[222]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1320-L1320 "Source code on GitHub"
 
-[223]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1320-L1320 "Source code on GitHub"
+[223]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1326-L1326 "Source code on GitHub"
 
-[224]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1326-L1326 "Source code on GitHub"
+[224]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1367-L1413 "Source code on GitHub"
 
-[225]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1367-L1413 "Source code on GitHub"
+[225]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1373-L1376 "Source code on GitHub"
 
-[226]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1373-L1376 "Source code on GitHub"
+[226]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1382-L1384 "Source code on GitHub"
 
-[227]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1382-L1384 "Source code on GitHub"
+[227]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1420-L1583 "Source code on GitHub"
 
-[228]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1420-L1583 "Source code on GitHub"
+[228]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1496-L1496 "Source code on GitHub"
 
-[229]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1496-L1496 "Source code on GitHub"
+[229]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1426-L1430 "Source code on GitHub"
 
-[230]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1426-L1430 "Source code on GitHub"
+[230]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1436-L1439 "Source code on GitHub"
 
-[231]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1436-L1439 "Source code on GitHub"
+[231]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1445-L1449 "Source code on GitHub"
 
-[232]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1445-L1449 "Source code on GitHub"
+[232]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1455-L1457 "Source code on GitHub"
 
-[233]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1455-L1457 "Source code on GitHub"
+[233]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1717-L1931 "Source code on GitHub"
 
-[234]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1717-L1931 "Source code on GitHub"
+[234]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1722-L1739 "Source code on GitHub"
 
-[235]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1722-L1739 "Source code on GitHub"
+[235]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1744-L1784 "Source code on GitHub"
 
-[236]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1744-L1784 "Source code on GitHub"
+[236]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1789-L1807 "Source code on GitHub"
 
-[237]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1789-L1807 "Source code on GitHub"
+[237]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1812-L1831 "Source code on GitHub"
 
-[238]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1812-L1831 "Source code on GitHub"
+[238]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1836-L1855 "Source code on GitHub"
 
-[239]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1836-L1855 "Source code on GitHub"
+[239]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1860-L1879 "Source code on GitHub"
 
-[240]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1860-L1879 "Source code on GitHub"
+[240]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L1884-L1930 "Source code on GitHub"
 
-[241]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L1884-L1930 "Source code on GitHub"
+[241]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L2168-L2666 "Source code on GitHub"
 
-[242]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L2168-L2666 "Source code on GitHub"
+[242]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L2520-L2530 "Source code on GitHub"
 
-[243]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L2520-L2530 "Source code on GitHub"
+[243]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L2536-L2545 "Source code on GitHub"
 
-[244]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L2536-L2545 "Source code on GitHub"
+[244]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L2550-L2555 "Source code on GitHub"
 
-[245]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L2550-L2555 "Source code on GitHub"
+[245]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/D3Graph.js#L2181-L2218 "Source code on GitHub"
 
-[246]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/D3Graph.js#L2181-L2218 "Source code on GitHub"
+[246]: https://developer.mozilla.org/docs/Web/Guide/Mobile
 
-[247]: https://developer.mozilla.org/docs/Web/Guide/Mobile
+[247]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math
 
-[248]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math
+[248]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/drawing/AnchorDrawing.js#L19-L48 "Source code on GitHub"
 
-[249]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/LinkDrawing.js#L32-L34 "Source code on GitHub"
+[249]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/drawing/LinkDrawing.js#L72-L74 "Source code on GitHub"
 
-[250]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L19-L19 "Source code on GitHub"
+[250]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L19-L19 "Source code on GitHub"
 
-[251]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L31-L31 "Source code on GitHub"
+[251]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L33-L33 "Source code on GitHub"
 
-[252]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L35-L35 "Source code on GitHub"
+[252]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L37-L37 "Source code on GitHub"
 
-[253]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L44-L44 "Source code on GitHub"
+[253]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L47-L47 "Source code on GitHub"
 
-[254]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L54-L54 "Source code on GitHub"
+[254]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L57-L57 "Source code on GitHub"
 
-[255]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L58-L58 "Source code on GitHub"
+[255]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L61-L61 "Source code on GitHub"
 
-[256]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L62-L62 "Source code on GitHub"
+[256]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L65-L65 "Source code on GitHub"
 
-[257]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L66-L66 "Source code on GitHub"
+[257]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L69-L69 "Source code on GitHub"
 
-[258]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L70-L70 "Source code on GitHub"
+[258]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L73-L73 "Source code on GitHub"
 
-[259]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L74-L74 "Source code on GitHub"
+[259]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L77-L77 "Source code on GitHub"
 
-[260]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L78-L78 "Source code on GitHub"
+[260]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L81-L81 "Source code on GitHub"
 
-[261]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L82-L82 "Source code on GitHub"
+[261]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L85-L85 "Source code on GitHub"
 
-[262]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L87-L87 "Source code on GitHub"
+[262]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L91-L91 "Source code on GitHub"
 
-[263]: https://git@github.com/:m860/opsearch-drawing/blob/739735ae160bea66d0af3a1150c6d7f1c8ee56d2/src/components/Types.js#L91-L91 "Source code on GitHub"
+[263]: https://git@github.com/:m860/opsearch-drawing/blob/6daa91fbb9c8d34c091a62bc66ae8ff88ed35d83/src/components/Types.js#L96-L96 "Source code on GitHub"

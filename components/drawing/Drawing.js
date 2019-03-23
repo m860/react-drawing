@@ -21,7 +21,7 @@ var _deepcopy = require("deepcopy");
 
 var _deepcopy2 = _interopRequireDefault(_deepcopy);
 
-var _D3Graph = require("./D3Graph");
+var _D3Graph = require("../D3Graph");
 
 var _deepmerge = require("deepmerge");
 
@@ -84,8 +84,9 @@ var Drawing = function () {
         value: function initialize(graph) {
             this.graph = graph;
             this.ready = true;
+            //initial AnchorDrawing
             this.anchors.forEach(function (anchor) {
-                anchor.initialize(graph);
+                return anchor.initialize(graph);
             });
         }
     }, {

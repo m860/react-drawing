@@ -97,15 +97,15 @@ var _UserInput = require('./UserInput');
 
 var _UserInput2 = _interopRequireDefault(_UserInput);
 
-var _TagDrawing = require('./TagDrawing');
+var _TagDrawing = require('./drawing/TagDrawing');
 
 var _TagDrawing2 = _interopRequireDefault(_TagDrawing);
 
-var _AnchorDrawing = require('./AnchorDrawing');
+var _AnchorDrawing = require('./drawing/AnchorDrawing');
 
 var _AnchorDrawing2 = _interopRequireDefault(_AnchorDrawing);
 
-var _LinkDrawing = require('./LinkDrawing');
+var _LinkDrawing = require('./drawing/LinkDrawing');
 
 var _LinkDrawing2 = _interopRequireDefault(_LinkDrawing);
 

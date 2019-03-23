@@ -51,16 +51,15 @@ export default class Drawing implements IDrawing {
     initialize(graph) {
         this.graph = graph;
         this.ready = true;
-        this.anchors.forEach((anchor: IDrawing & IAnchorDrawing) => {
-            anchor.initialize(graph);
-        });
+        //initial AnchorDrawing
+        this.anchors.forEach((anchor: IAnchorDrawing) => anchor.initialize(graph));
     }
 
     render(nextAttrs = {}) {
         const attrs = merge.all([this.attrs, this.selected ? this.selectedAttrs : {}, nextAttrs]);
         this.applyAttrs(attrs);
         const position = this.getPosition();
-        this.anchors.forEach((anchor: IDrawing & IAnchorDrawing) => {
+        this.anchors.forEach((anchor: IAnchorDrawing) => {
             const anchorOffset = anchor.getOffset();
             anchor.render({
                 cx: position.x + anchorOffset.x,

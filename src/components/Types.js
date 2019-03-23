@@ -19,6 +19,8 @@ export type AnchorDrawingOption = DrawingOption & {
     offset: Point
 };
 
+export type LinkTextOption = DrawingOption & {};
+
 export type LinkDrawingMode = {
     type: $Values<typeof LinkDrawingModeType>,
     option: Object
@@ -33,7 +35,8 @@ export type LinkDrawingOption = DrawingOption & {
      * 需要连接的图形的ID
      */
     to: [string, string],
-    mode: LinkDrawingMode
+    mode: LinkDrawingMode,
+    linkText?: Array<LinkTextOption>
 }
 
 export type TagDrawingOption = DrawingOption & {
@@ -81,37 +84,56 @@ export interface IDrawing {
      */
     anchors: Array<IAnchorDrawing>,
     listeners: Array,
+
     /**
      * 绘制图形
      */
-    select: () => void,
+    select(): void,
+
     /**
      * 设置svg的属性
      */
-    applyAttrs: () => void,
-    initialize: (graph: mixed) => void,
-    render: (nextAttrs: mixed) => void,
-    remove: () => void,
-    moveTo: (vec: Point) => void,
-    getPosition: () => Point,
-    toData: () => Object,
-    findAnchor: (id: string) => IDrawing & IAnchorDrawing,
-    once: (name: string, callback: Function) => void,
-    addListener: (name: string, callback: Function) => void,
-    emit: (name: string, data: any) => void
+    applyAttrs(attrs: Object): void,
+
+    initialize(graph: mixed): void,
+
+    render(nextAttrs: mixed): void,
+
+    remove(): void,
+
+    moveTo(vec: Point): void,
+
+    getPosition(): Point,
+
+    toData(): Object,
+
+    findAnchor(id: string): IAnchorDrawing,
+
+    once(name: string, callback: Function): void,
+
+    addListener(name: string, callback: Function): void,
+
+    emit(name: string, data: any): void
 }
 
-export interface ILinkDrawing {
+export interface ILinkDrawing extends IDrawing {
     from: string,
     to: string,
-    mode: LinkDrawingMode
+    mode: LinkDrawingMode,
+    linkText: Array<ILinkTextDrawing>,
+
+    getTextPosition(): Point
 }
 
-export interface ITagDrawing {
+export interface ITagDrawing extends IDrawing {
     tag: string
 }
 
-export interface IAnchorDrawing {
+export interface IAnchorDrawing extends IDrawing {
     offset: Point,
-    getOffset: () => Point
+
+    getOffset(): Point
+}
+
+export interface ILinkTextDrawing extends IDrawing {
 }

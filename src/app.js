@@ -317,7 +317,22 @@ class Example extends Component {
                                                     type: "LinkDrawing",
                                                     option: {
                                                         from: ["tag1", "right"],
-                                                        to: ["tag2", "left"]
+                                                        to: ["tag2", "left"],
+                                                        linkText: [{
+                                                            text: "文本1",
+                                                            attrs: {
+                                                                dx: 0,
+                                                                dy: -10
+                                                            }
+                                                        }, {
+                                                            text: "文本2",
+                                                            attrs: {
+                                                                dx: 0,
+                                                                dy: 10,
+                                                                fill: "red",
+                                                                stroke:"red"
+                                                            }
+                                                        }]
                                                     }
                                                 }]
                                             }])
