@@ -22,6 +22,7 @@ import LinkDrawing from "./drawing/LinkDrawing"
 import LineDrawing from "./drawing/LineDrawing"
 import CircleDrawing from "./drawing/CircleDrawing"
 import DotDrawing from "./drawing/DotDrawing"
+import RectDrawing from "./drawing/RectDrawing"
 
 //#region event
 const emitter = new EventEmitter();
@@ -105,6 +106,7 @@ let drawingIndex = {
     "LineDrawing": LineDrawing,
     "CircleDrawing": CircleDrawing,
     "DotDrawing": DotDrawing,
+    "RectDrawing": RectDrawing,
 };
 let actionIndex = {};
 
@@ -812,43 +814,43 @@ export class OldDrawing {
 //
 // registerDrawing("DotDrawing", DotDrawing);
 
-/**
- * 绘画矩形
- * */
-export class RectDrawing extends OldDrawing {
-    /**
-     * 矩形默认的attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {};
-    /**
-     * 矩形选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {};
-
-    constructor(option) {
-        super(option);
-        this.type = "RectDrawing"
-    }
-
-    get defaultAttrs() {
-        return RectDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return RectDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("path");
-    }
-}
-
-registerDrawing("RectDrawing", RectDrawing);
+// /**
+//  * 绘画矩形
+//  * */
+// export class RectDrawing extends OldDrawing {
+//     /**
+//      * 矩形默认的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {};
+//     /**
+//      * 矩形选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {};
+//
+//     constructor(option) {
+//         super(option);
+//         this.type = "RectDrawing"
+//     }
+//
+//     get defaultAttrs() {
+//         return RectDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return RectDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("path");
+//     }
+// }
+//
+// registerDrawing("RectDrawing", RectDrawing);
 
 /**
  * 绘制刻度
