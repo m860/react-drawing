@@ -1,6 +1,5 @@
 import TagDrawing from "./TagDrawing";
 import type {DrawingOption, Point, TagDrawingOption} from "../Types";
-import * as d3 from 'd3'
 import merge from "deepmerge"
 
 const DefaultLineOption: DrawingOption = {

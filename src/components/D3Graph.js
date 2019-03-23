@@ -20,6 +20,7 @@ import TagDrawing from "./drawing/TagDrawing"
 import AnchorDrawing from "./drawing/AnchorDrawing"
 import LinkDrawing from "./drawing/LinkDrawing"
 import LineDrawing from "./drawing/LineDrawing"
+import CircleDrawing from "./drawing/CircleDrawing"
 
 //#region event
 const emitter = new EventEmitter();
@@ -101,6 +102,7 @@ let drawingIndex = {
     "AnchorDrawing": AnchorDrawing,
     "LinkDrawing": LinkDrawing,
     "LineDrawing": LineDrawing,
+    "CircleDrawing": CircleDrawing,
 };
 let actionIndex = {};
 
@@ -687,71 +689,71 @@ export class OldDrawing {
 //
 // registerDrawing("LineDrawing", LineDrawing);
 
-/**
- * 绘画圈
- * */
-export class CircleDrawing extends OldDrawing {
-    /**
-     * 圈的默认attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {
-        fill: "transparent",
-        stroke: "black",
-        r: "10px",
-        "stroke-width": "1px"
-    };
-    /**
-     * 圈选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {
-        stroke: "red"
-    };
-
-    constructor(option) {
-        super(option);
-        this.type = "CircleDrawing";
-    }
-
-    get defaultAttrs() {
-        return CircleDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return CircleDrawing.selectedAttrs;
-    }
-
-    get r() {
-        return parseFloat(this.selection.attr("r"));
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("circle");
-    }
-
-    getLinkPoint() {
-        const x = parseFloat(this.attrs.cx);
-        const y = parseFloat(this.attrs.cy);
-        return new Point(x, y);
-    }
-
-    moveTo(vec) {
-        if (this.selection) {
-            this.attrs.cx += vec.x;
-            this.attrs.cy += vec.y;
-            this.selection
-                .attr("cx", this.graph.toScreenX(this.attrs.cx))
-                .attr("cy", this.graph.toScreenY(this.attrs.cy));
-            emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
-        }
-    }
-}
-
-registerDrawing("CircleDrawing", CircleDrawing);
+// /**
+//  * 绘画圈
+//  * */
+// export class CircleDrawing extends OldDrawing {
+//     /**
+//      * 圈的默认attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {
+//         fill: "transparent",
+//         stroke: "black",
+//         r: "10px",
+//         "stroke-width": "1px"
+//     };
+//     /**
+//      * 圈选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {
+//         stroke: "red"
+//     };
+//
+//     constructor(option) {
+//         super(option);
+//         this.type = "CircleDrawing";
+//     }
+//
+//     get defaultAttrs() {
+//         return CircleDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return CircleDrawing.selectedAttrs;
+//     }
+//
+//     get r() {
+//         return parseFloat(this.selection.attr("r"));
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("circle");
+//     }
+//
+//     getLinkPoint() {
+//         const x = parseFloat(this.attrs.cx);
+//         const y = parseFloat(this.attrs.cy);
+//         return new Point(x, y);
+//     }
+//
+//     moveTo(vec) {
+//         if (this.selection) {
+//             this.attrs.cx += vec.x;
+//             this.attrs.cy += vec.y;
+//             this.selection
+//                 .attr("cx", this.graph.toScreenX(this.attrs.cx))
+//                 .attr("cy", this.graph.toScreenY(this.attrs.cy));
+//             emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
+//         }
+//     }
+// }
+//
+// registerDrawing("CircleDrawing", CircleDrawing);
 
 /**
  * 绘制点
