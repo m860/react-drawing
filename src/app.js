@@ -1,46 +1,35 @@
 import './sass/index.sass'
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import InteractionTable from './components/InteractionTable'
 import D3Graph, {
-    ReDrawAction,
-    DrawAction,
-    LineDrawing,
-    CircleDrawing,
-    LinkDrawing,
+    ActionTypeEnums,
     ArrowLinkDrawing,
+    ArrowLinkToolbar,
+    CircleDrawing,
+    CircleToolbar,
     DotDrawing,
+    DrawingToolbar,
+    fromActions,
+    LineDrawing,
+    LineToolbar,
+    LinkDrawing,
+    LinkToolbar,
+    MoveToolbar,
+    NoneToolbar,
     NumberScaleDrawing,
     PathDrawing,
-    graphModeEnum,
-    TextDrawing,
-    RectDrawing,
-    LineToolbar,
-    CircleToolbar,
-    fromActions,
-    DeleteAction,
-    Toolbar,
-    TextToolbar,
-    ClearAction,
-    NoneToolbar,
-    LinkToolbar,
-    ArrowLinkToolbar,
     TextCircleDrawing,
-    InputAction,
     TextCircleToolbar,
-    MoveToolbar, MoveAction, ActionTypeEnums,
-    DrawingToolbar
+    TextDrawing,
+    TextToolbar
 } from './components/D3Graph'
-import {set as setPath, get as getPath} from 'object-path'
 import guid from 'guid'
 import * as d3 from 'd3'
-import data from '../test/drawing-data'
 import update from 'immutability-helper'
-import UserInput from "./components/UserInput";
 
-LineDrawing.selectedAttrs = {
-    stroke: "blue"
-};
+// LineDrawing.selectedAttrs = {
+//     stroke: "blue"
+// };
 
 class Example extends Component {
     constructor(props) {

@@ -19,7 +19,7 @@ import UserInput from "./UserInput"
 import TagDrawing from "./drawing/TagDrawing"
 import AnchorDrawing from "./drawing/AnchorDrawing"
 import LinkDrawing from "./drawing/LinkDrawing"
-
+import LineDrawing from "./drawing/LineDrawing"
 
 //#region event
 const emitter = new EventEmitter();
@@ -100,6 +100,7 @@ let drawingIndex = {
     "TagDrawing": TagDrawing,
     "AnchorDrawing": AnchorDrawing,
     "LinkDrawing": LinkDrawing,
+    "LineDrawing": LineDrawing,
 };
 let actionIndex = {};
 
@@ -609,82 +610,82 @@ export class OldDrawing {
     }
 }
 
-/**
- * 绘画线
- * */
-export class LineDrawing extends OldDrawing {
-    /**
-     * 线的默认attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {
-        fill: "transparent",
-        stroke: "black",
-        "stroke-width": "3px"
-    };
-    /**
-     * 线选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {
-        stroke: "red"
-    };
-
-    constructor(option) {
-        super(option);
-        this.type = "LineDrawing";
-    }
-
-    get defaultAttrs() {
-        return LineDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return LineDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("line");
-        this.selection.on("mouseover", (a, b, eles) => {
-            if (eles.length > 0) {
-                const e = d3.select(eles[0]);
-                const width = parseFloat(e.attr("stroke-width"));
-                if (width < 8) {
-                    this._originalWidth = width;
-                    e.attr("stroke-width", 8)
-                }
-            }
-        }).on("mouseout", (a, b, eles) => {
-            if (eles.length > 0) {
-                if (this._originalWidth) {
-                    const e = d3.select(eles[0]);
-                    e.attr("stroke-width", this._originalWidth);
-                    delete this._originalWidth;
-                }
-            }
-        })
-    }
-
-    moveTo(vec) {
-        if (this.selection) {
-            this.attrs.x1 += vec.x;
-            this.attrs.x2 += vec.x;
-            this.attrs.y1 += vec.y;
-            this.attrs.y2 += vec.y;
-            this.selection
-                .attr("x1", this.graph.toScreenX(this.attrs.x1))
-                .attr("y1", this.graph.toScreenY(this.attrs.y1))
-                .attr("x2", this.graph.toScreenX(this.attrs.x2))
-                .attr("y2", this.graph.toScreenY(this.attrs.y2));
-            emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
-        }
-    }
-}
-
-registerDrawing("LineDrawing", LineDrawing);
+// /**
+//  * 绘画线
+//  * */
+// export class LineDrawing extends OldDrawing {
+//     /**
+//      * 线的默认attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {
+//         fill: "transparent",
+//         stroke: "black",
+//         "stroke-width": "3px"
+//     };
+//     /**
+//      * 线选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {
+//         stroke: "red"
+//     };
+//
+//     constructor(option) {
+//         super(option);
+//         this.type = "LineDrawing";
+//     }
+//
+//     get defaultAttrs() {
+//         return LineDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return LineDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("line");
+//         this.selection.on("mouseover", (a, b, eles) => {
+//             if (eles.length > 0) {
+//                 const e = d3.select(eles[0]);
+//                 const width = parseFloat(e.attr("stroke-width"));
+//                 if (width < 8) {
+//                     this._originalWidth = width;
+//                     e.attr("stroke-width", 8)
+//                 }
+//             }
+//         }).on("mouseout", (a, b, eles) => {
+//             if (eles.length > 0) {
+//                 if (this._originalWidth) {
+//                     const e = d3.select(eles[0]);
+//                     e.attr("stroke-width", this._originalWidth);
+//                     delete this._originalWidth;
+//                 }
+//             }
+//         })
+//     }
+//
+//     moveTo(vec) {
+//         if (this.selection) {
+//             this.attrs.x1 += vec.x;
+//             this.attrs.x2 += vec.x;
+//             this.attrs.y1 += vec.y;
+//             this.attrs.y2 += vec.y;
+//             this.selection
+//                 .attr("x1", this.graph.toScreenX(this.attrs.x1))
+//                 .attr("y1", this.graph.toScreenY(this.attrs.y1))
+//                 .attr("x2", this.graph.toScreenX(this.attrs.x2))
+//                 .attr("y2", this.graph.toScreenY(this.attrs.y2));
+//             emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
+//         }
+//     }
+// }
+//
+// registerDrawing("LineDrawing", LineDrawing);
 
 /**
  * 绘画圈

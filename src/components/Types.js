@@ -41,10 +41,6 @@ export type LinkDrawingOption = DrawingOption & {
 
 export type TagDrawingOption = DrawingOption & {
     tag: string,
-    /**
-     * 必须是function,不能使用箭头函数
-     */
-    moveTo: (vec: Point) => void
 }
 
 export interface IDrawing {
