@@ -971,196 +971,196 @@ export class NumberScaleDrawing extends OldDrawing {
 
 registerDrawing("NumberScaleDrawing", NumberScaleDrawing);
 
-/**
- * 绘制带箭头的link
- * @todo 实现label的修改
- * */
-export class ArrowLinkDrawing extends OldDrawing {
-    /**
-     * 带箭头link的默认attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {
-        fill: "black",
-        stroke: "black"
-    };
-    /**
-     * 带箭头link的选中attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {
-        stroke: "red"
-    };
-
-    /**
-     * @constructor
-     *
-     * @param {object} option
-     * @param {string} option.sourceId - link的源id
-     * @param {string} option.targetId - link的目标id
-     * @param {string|function} option.label - link的label
-     * @param {object} option.labelAttrs - label的attributes
-     * */
-    constructor(option) {
-        super(option);
-        this.type = "ArrowLinkDrawing";
-        this.sourceId = getPath(option, "sourceId");
-        if (!this.sourceId) {
-            throw new Error(`ArrowLinkDrawing option require sourceId property`);
-        }
-        this.targetId = getPath(option, "targetId");
-        if (!this.targetId) {
-            throw new Error(`ArrowLinkDrawing option require targetId property`);
-        }
-        this.source = null;
-        this.target = null;
-        this.label = getPath(option, "label");
-        this.labelAttrs = getPath(option, "labelAttrs");
-        this.labelSelection = null;
-        this.listeners = [];
-        this.distance = getPath(option, "distance", 5);
-    }
-
-    get defaultAttrs() {
-        return ArrowLinkDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return ArrowLinkDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.source = this.graph.findShapeById(this.sourceId);
-        this.target = this.graph.findShapeById(this.targetId);
-        this.selection = d3.select(graph.ele).append("path");
-        this.selection.on("mouseover", (a, b, eles) => {
-            if (eles.length > 0) {
-                const e = d3.select(eles[0]);
-                const width = parseFloat(e.attr("stroke-width"));
-
-                if (width < 8 || isNaN(width)) {
-                    this._originalWidth = width;
-                    e.attr("stroke-width", 8)
-                }
-            }
-        }).on("mouseout", (a, b, eles) => {
-            if (eles.length > 0) {
-                const e = d3.select(eles[0]);
-                if (this._originalWidth) {
-                    e.attr("stroke-width", this._originalWidth);
-                }
-                else if (isNaN(this._originalWidth)) {
-                    e.attr("stroke-width", null);
-                }
-                delete this._originalWidth;
-            }
-        });
-        this.labelSelection = d3.select(graph.ele).append("text");
-        this.listeners.push(
-            emitter.addListener(EVENT_DRAWING_POSITION_CHANGE, shape => {
-                if (shape.id === this.sourceId || shape.id === this.targetId) {
-                    this.render();
-                }
-            })
-        )
-    }
-
-    remove() {
-        super.remove();
-        if (this.labelSelection) {
-            this.labelSelection.remove();
-        }
-        this.listeners.forEach(listener => listener.remove());
-        this.labelSelection = null;
-        emitter.emit(`remove:${this.id}`);
-    }
-
-    renderLabel(x, y) {
-        if (this.labelSelection) {
-            if (this.label) {
-                this.labelSelection.text(this.label);
-            }
-            const attrs = Object.assign({
-                x: this.graph.toScreenX(x),
-                y: this.graph.toScreenY(y)
-            }, this.labelAttrs);
-            this.updateAttrs(this.labelSelection, attrs);
-        }
-    }
-
-    render() {
-        //计算link的位置信息
-        const {p1, p2} = _calculateLinkPoint(this.source, this.target);
-        this.attrs = update(this.attrs, {
-            d: {$set: this.getArrowLinkPath(p1, p2, this.distance / this.graph.scale).join(' ')}
-        });
-        super.render();
-        const hx = Math.abs(p1.x - p2.x) / 2;
-        const hy = Math.abs(p1.y - p2.y) / 2;
-        const labelX = Math.min(p1.x, p2.x) + hx;
-        const labelY = Math.min(p1.y, p2.y) + hy;
-        this.renderLabel(labelX, labelY);
-        emitter.emit(`render:${this.id}`);
-    }
-
-    /**
-     * 获取箭头链接的路径
-     * @param startPoint - 开始点
-     * @param endPoint - 结束点
-     * @param distance - 箭头的长度,长度越短箭头越小
-     * @returns {string[]}
-     */
-    getArrowLinkPath(startPoint, endPoint, distance = 10) {
-        const diffX = startPoint.x - endPoint.x;
-        const diffY = startPoint.y - endPoint.y;
-        const a = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
-        const ex = diffX / a;
-        const ey = diffY / a;
-
-        const q2x = endPoint.x + ex * distance;
-        const q2y = endPoint.y + ey * distance;
-
-        const fx = Math.cos(Math.PI / 2) * ex + Math.sin(Math.PI / 2) * ey;
-        const fy = -Math.sin(Math.PI / 2) * ex + Math.cos(Math.PI / 2) * ey;
-        const q1x = q2x + fx * distance * 0.5;
-        const q1y = q2y + fy * distance * 0.5;
-
-        const gx = Math.cos(-Math.PI / 2) * ex + Math.sin(-Math.PI / 2) * ey;
-        const gy = -Math.sin(-Math.PI / 2) * ex + Math.cos(-Math.PI / 2) * ey;
-        const q3x = q2x + gx * distance * 0.5;
-        const q3y = q2y + gy * distance * 0.5;
-
-        return [
-            `M ${this.graph.toScreenX(startPoint.x)} ${this.graph.toScreenY(startPoint.y)}`,
-            `L ${this.graph.toScreenX(q2x)} ${this.graph.toScreenY(q2y)}`,
-            `L ${this.graph.toScreenX(q1x)} ${this.graph.toScreenY(q1y)}`,
-            `L ${this.graph.toScreenX(endPoint.x)} ${this.graph.toScreenY(endPoint.y)}`,
-            `L ${this.graph.toScreenX(q3x)} ${this.graph.toScreenY(q3y)}`,
-            `L ${this.graph.toScreenX(q2x)} ${this.graph.toScreenY(q2y)}`,
-            `L ${this.graph.toScreenX(startPoint.x)} ${this.graph.toScreenY(startPoint.y)}`,
-            'Z'
-        ];
-    }
-
-    toData() {
-        return {
-            type: this.type,
-            option: {
-                id: this.id,
-                sourceId: this.sourceId,
-                targetId: this.targetId,
-                label: this.label,
-                labelAttrs: this.labelAttrs,
-                distance: this.distance
-            }
-        }
-    }
-}
-
-registerDrawing("ArrowLinkDrawing", ArrowLinkDrawing);
+// /**
+//  * 绘制带箭头的link
+//  * @todo 实现label的修改
+//  * */
+// export class ArrowLinkDrawing extends OldDrawing {
+//     /**
+//      * 带箭头link的默认attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {
+//         fill: "black",
+//         stroke: "black"
+//     };
+//     /**
+//      * 带箭头link的选中attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {
+//         stroke: "red"
+//     };
+//
+//     /**
+//      * @constructor
+//      *
+//      * @param {object} option
+//      * @param {string} option.sourceId - link的源id
+//      * @param {string} option.targetId - link的目标id
+//      * @param {string|function} option.label - link的label
+//      * @param {object} option.labelAttrs - label的attributes
+//      * */
+//     constructor(option) {
+//         super(option);
+//         this.type = "ArrowLinkDrawing";
+//         this.sourceId = getPath(option, "sourceId");
+//         if (!this.sourceId) {
+//             throw new Error(`ArrowLinkDrawing option require sourceId property`);
+//         }
+//         this.targetId = getPath(option, "targetId");
+//         if (!this.targetId) {
+//             throw new Error(`ArrowLinkDrawing option require targetId property`);
+//         }
+//         this.source = null;
+//         this.target = null;
+//         this.label = getPath(option, "label");
+//         this.labelAttrs = getPath(option, "labelAttrs");
+//         this.labelSelection = null;
+//         this.listeners = [];
+//         this.distance = getPath(option, "distance", 5);
+//     }
+//
+//     get defaultAttrs() {
+//         return ArrowLinkDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return ArrowLinkDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.source = this.graph.findShapeById(this.sourceId);
+//         this.target = this.graph.findShapeById(this.targetId);
+//         this.selection = d3.select(graph.ele).append("path");
+//         this.selection.on("mouseover", (a, b, eles) => {
+//             if (eles.length > 0) {
+//                 const e = d3.select(eles[0]);
+//                 const width = parseFloat(e.attr("stroke-width"));
+//
+//                 if (width < 8 || isNaN(width)) {
+//                     this._originalWidth = width;
+//                     e.attr("stroke-width", 8)
+//                 }
+//             }
+//         }).on("mouseout", (a, b, eles) => {
+//             if (eles.length > 0) {
+//                 const e = d3.select(eles[0]);
+//                 if (this._originalWidth) {
+//                     e.attr("stroke-width", this._originalWidth);
+//                 }
+//                 else if (isNaN(this._originalWidth)) {
+//                     e.attr("stroke-width", null);
+//                 }
+//                 delete this._originalWidth;
+//             }
+//         });
+//         this.labelSelection = d3.select(graph.ele).append("text");
+//         this.listeners.push(
+//             emitter.addListener(EVENT_DRAWING_POSITION_CHANGE, shape => {
+//                 if (shape.id === this.sourceId || shape.id === this.targetId) {
+//                     this.render();
+//                 }
+//             })
+//         )
+//     }
+//
+//     remove() {
+//         super.remove();
+//         if (this.labelSelection) {
+//             this.labelSelection.remove();
+//         }
+//         this.listeners.forEach(listener => listener.remove());
+//         this.labelSelection = null;
+//         emitter.emit(`remove:${this.id}`);
+//     }
+//
+//     renderLabel(x, y) {
+//         if (this.labelSelection) {
+//             if (this.label) {
+//                 this.labelSelection.text(this.label);
+//             }
+//             const attrs = Object.assign({
+//                 x: this.graph.toScreenX(x),
+//                 y: this.graph.toScreenY(y)
+//             }, this.labelAttrs);
+//             this.updateAttrs(this.labelSelection, attrs);
+//         }
+//     }
+//
+//     render() {
+//         //计算link的位置信息
+//         const {p1, p2} = _calculateLinkPoint(this.source, this.target);
+//         this.attrs = update(this.attrs, {
+//             d: {$set: this.getArrowLinkPath(p1, p2, this.distance / this.graph.scale).join(' ')}
+//         });
+//         super.render();
+//         const hx = Math.abs(p1.x - p2.x) / 2;
+//         const hy = Math.abs(p1.y - p2.y) / 2;
+//         const labelX = Math.min(p1.x, p2.x) + hx;
+//         const labelY = Math.min(p1.y, p2.y) + hy;
+//         this.renderLabel(labelX, labelY);
+//         emitter.emit(`render:${this.id}`);
+//     }
+//
+//     /**
+//      * 获取箭头链接的路径
+//      * @param startPoint - 开始点
+//      * @param endPoint - 结束点
+//      * @param distance - 箭头的长度,长度越短箭头越小
+//      * @returns {string[]}
+//      */
+//     getArrowLinkPath(startPoint, endPoint, distance = 10) {
+//         const diffX = startPoint.x - endPoint.x;
+//         const diffY = startPoint.y - endPoint.y;
+//         const a = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
+//         const ex = diffX / a;
+//         const ey = diffY / a;
+//
+//         const q2x = endPoint.x + ex * distance;
+//         const q2y = endPoint.y + ey * distance;
+//
+//         const fx = Math.cos(Math.PI / 2) * ex + Math.sin(Math.PI / 2) * ey;
+//         const fy = -Math.sin(Math.PI / 2) * ex + Math.cos(Math.PI / 2) * ey;
+//         const q1x = q2x + fx * distance * 0.5;
+//         const q1y = q2y + fy * distance * 0.5;
+//
+//         const gx = Math.cos(-Math.PI / 2) * ex + Math.sin(-Math.PI / 2) * ey;
+//         const gy = -Math.sin(-Math.PI / 2) * ex + Math.cos(-Math.PI / 2) * ey;
+//         const q3x = q2x + gx * distance * 0.5;
+//         const q3y = q2y + gy * distance * 0.5;
+//
+//         return [
+//             `M ${this.graph.toScreenX(startPoint.x)} ${this.graph.toScreenY(startPoint.y)}`,
+//             `L ${this.graph.toScreenX(q2x)} ${this.graph.toScreenY(q2y)}`,
+//             `L ${this.graph.toScreenX(q1x)} ${this.graph.toScreenY(q1y)}`,
+//             `L ${this.graph.toScreenX(endPoint.x)} ${this.graph.toScreenY(endPoint.y)}`,
+//             `L ${this.graph.toScreenX(q3x)} ${this.graph.toScreenY(q3y)}`,
+//             `L ${this.graph.toScreenX(q2x)} ${this.graph.toScreenY(q2y)}`,
+//             `L ${this.graph.toScreenX(startPoint.x)} ${this.graph.toScreenY(startPoint.y)}`,
+//             'Z'
+//         ];
+//     }
+//
+//     toData() {
+//         return {
+//             type: this.type,
+//             option: {
+//                 id: this.id,
+//                 sourceId: this.sourceId,
+//                 targetId: this.targetId,
+//                 label: this.label,
+//                 labelAttrs: this.labelAttrs,
+//                 distance: this.distance
+//             }
+//         }
+//     }
+// }
+//
+// registerDrawing("ArrowLinkDrawing", ArrowLinkDrawing);
 
 // /**
 //  * 绘制link
