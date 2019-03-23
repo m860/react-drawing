@@ -21,6 +21,7 @@ import AnchorDrawing from "./drawing/AnchorDrawing"
 import LinkDrawing from "./drawing/LinkDrawing"
 import LineDrawing from "./drawing/LineDrawing"
 import CircleDrawing from "./drawing/CircleDrawing"
+import DotDrawing from "./drawing/DotDrawing"
 
 //#region event
 const emitter = new EventEmitter();
@@ -103,6 +104,7 @@ let drawingIndex = {
     "LinkDrawing": LinkDrawing,
     "LineDrawing": LineDrawing,
     "CircleDrawing": CircleDrawing,
+    "DotDrawing": DotDrawing,
 };
 let actionIndex = {};
 
@@ -755,60 +757,60 @@ export class OldDrawing {
 //
 // registerDrawing("CircleDrawing", CircleDrawing);
 
-/**
- * 绘制点
- * */
-export class DotDrawing extends OldDrawing {
-    /**
-     * 点默认的attribute
-     * @static
-     * @type {Object}
-     */
-    static defaultAttrs = {
-        fill: "black",
-        stroke: "black",
-        r: "5px"
-    };
-    /**
-     * 点选中的attribute
-     * @static
-     * @type {Object}
-     */
-    static selectedAttrs = {
-        stroke: "red"
-    };
-
-    constructor(option) {
-        super(option);
-        this.type = "DotDrawing";
-    }
-
-    get defaultAttrs() {
-        return DotDrawing.defaultAttrs;
-    }
-
-    get selectedAttrs() {
-        return DotDrawing.selectedAttrs;
-    }
-
-    initialize(graph) {
-        super.initialize(graph);
-        this.selection = d3.select(graph.ele).append("circle");
-    }
-
-    moveTo(vec) {
-        if (this.selection) {
-            this.attrs.cx += vec.x;
-            this.attrs.cy += vec.y;
-            this.selection
-                .attr("cx", this.graph.toScreenX(this.attrs.cx))
-                .attr("cy", this.graph.toScreenY(this.attrs.cy));
-            emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
-        }
-    }
-}
-
-registerDrawing("DotDrawing", DotDrawing);
+// /**
+//  * 绘制点
+//  * */
+// export class DotDrawing extends OldDrawing {
+//     /**
+//      * 点默认的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static defaultAttrs = {
+//         fill: "black",
+//         stroke: "black",
+//         r: "5px"
+//     };
+//     /**
+//      * 点选中的attribute
+//      * @static
+//      * @type {Object}
+//      */
+//     static selectedAttrs = {
+//         stroke: "red"
+//     };
+//
+//     constructor(option) {
+//         super(option);
+//         this.type = "DotDrawing";
+//     }
+//
+//     get defaultAttrs() {
+//         return DotDrawing.defaultAttrs;
+//     }
+//
+//     get selectedAttrs() {
+//         return DotDrawing.selectedAttrs;
+//     }
+//
+//     initialize(graph) {
+//         super.initialize(graph);
+//         this.selection = d3.select(graph.ele).append("circle");
+//     }
+//
+//     moveTo(vec) {
+//         if (this.selection) {
+//             this.attrs.cx += vec.x;
+//             this.attrs.cy += vec.y;
+//             this.selection
+//                 .attr("cx", this.graph.toScreenX(this.attrs.cx))
+//                 .attr("cy", this.graph.toScreenY(this.attrs.cy));
+//             emitter.emit(EVENT_DRAWING_POSITION_CHANGE, this);
+//         }
+//     }
+// }
+//
+// registerDrawing("DotDrawing", DotDrawing);
 
 /**
  * 绘画矩形
