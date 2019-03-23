@@ -23,6 +23,7 @@ export default class Drawing implements IDrawing {
             this.anchors = [];
         }
         this.listeners = [];
+        this.type = this.constructor.name;
     }
 
     applyAttrs(attrs = {}) {

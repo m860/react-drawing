@@ -1,4 +1,4 @@
-import {LinkDrawingModeType} from "./Enums";
+import {ActionEnum, LinkDrawingModeType} from "./Enums";
 
 export type Point = {
     x: number,
@@ -7,6 +7,11 @@ export type Point = {
 
 export type PathType = Point & {
     action: string
+};
+
+export type ActionType = {
+    type: $Values<typeof ActionEnum>,
+    params: [DrawingType]
 };
 
 export type DrawingOption = {
