@@ -5,6 +5,11 @@ export type Point = {
     y: number
 }
 
+export type DrawingType = {
+    type: string,
+    option: DrawingOption & *
+};
+
 export type PathType = Point & {
     action: string
 };
@@ -20,37 +25,6 @@ export type DrawingOption = {
     text?: string | Function,
     anchors?: Array<AnchorDrawingOption>
 };
-
-export type AnchorDrawingOption = DrawingOption & {
-    /**
-     * Anchor的相对位置,基于所在图形的getPosition来确定真实的位置
-     */
-    offset: Point
-};
-
-export type LinkTextOption = DrawingOption & {};
-
-export type LinkDrawingMode = {
-    type: $Values<typeof LinkDrawingModeType>,
-    option: Object
-};
-
-export type LinkDrawingOption = DrawingOption & {
-    /**
-     * 需要连接的图形的ID和anchor ID
-     */
-    from: [string, string],
-    /**
-     * 需要连接的图形的ID
-     */
-    to: [string, string],
-    mode: LinkDrawingMode,
-    linkText?: Array<LinkTextOption>
-}
-
-export type TagDrawingOption = DrawingOption & {
-    tag: string,
-}
 
 export interface IDrawing {
     constructor: (option: DrawingOption) => void,
@@ -123,6 +97,23 @@ export interface IDrawing {
     formatPath(data: Array<PathType>): string
 }
 
+export type LinkDrawingMode = {
+    type: $Values<typeof LinkDrawingModeType>,
+    option: Object
+};
+export type LinkDrawingOption = DrawingOption & {
+    /**
+     * 需要连接的图形的ID和anchor ID
+     */
+    from: [string, string],
+    /**
+     * 需要连接的图形的ID
+     */
+    to: [string, string],
+    mode: LinkDrawingMode,
+    linkText?: Array<LinkTextOption>
+}
+
 export interface ILinkDrawing extends IDrawing {
     from: string,
     to: string,
@@ -132,15 +123,28 @@ export interface ILinkDrawing extends IDrawing {
     getTextPosition(): Point
 }
 
+export type TagDrawingOption = DrawingOption & {
+    tag: string,
+}
+
 export interface ITagDrawing extends IDrawing {
     tag: string
 }
+
+export type AnchorDrawingOption = DrawingOption & {
+    /**
+     * Anchor的相对位置,基于所在图形的getPosition来确定真实的位置
+     */
+    offset: Point
+};
 
 export interface IAnchorDrawing extends IDrawing {
     offset: Point,
 
     getOffset(): Point
 }
+
+export type LinkTextOption = DrawingOption & {};
 
 export interface ILinkTextDrawing extends IDrawing {
 }
@@ -152,11 +156,6 @@ export type PathOption = DrawingOption & {
 export interface IPathDrawing extends IDrawing {
     d: Array<PathType>
 }
-
-export type DrawingType = {
-    type: string,
-    option: DrawingOption & *
-};
 
 export type GroupOption = DrawingOption & {
     drawings: Array<DrawingType>
@@ -181,7 +180,7 @@ export type NumberScaleOption = DrawingOption & {
     scale: number
 }
 
-export interface INumberScaleDrawing extends IDrawing{
+export interface INumberScaleDrawing extends IDrawing {
     original: Point,
     xAxisLength: number,
     yAxisLength: number,
