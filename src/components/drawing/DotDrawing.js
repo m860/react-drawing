@@ -12,7 +12,7 @@ const DefaultDotOption: DrawingOption = {
 
 export default class DotDrawing extends CircleDrawing {
     constructor(option: DrawingOption) {
-        const opt: TagDrawingOption = merge.all([DefaultDotOption, option])
+        const opt: TagDrawingOption = merge.all([DefaultDotOption, option||{}])
         super(opt);
     }
 }
