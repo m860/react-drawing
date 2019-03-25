@@ -10,4 +10,5 @@ export default {
     GroupDrawing:require("./GroupDrawing").default,
     TextCircleDrawing:require("./TextCircleDrawing").default,
     NumberScaleDrawing:require("./NumberScaleDrawing").default,
+    PolylineLinkDrawing:require("./PolylineLinkDrawing").default,
 }

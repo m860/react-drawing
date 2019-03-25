@@ -132,4 +132,11 @@ export default class Drawing implements IDrawing {
         });
         return arr.join(" ");
     }
+
+    findDrawingByID(id) {
+        if (this.id === id) {
+            return this;
+        }
+        return null;
+    }
 }

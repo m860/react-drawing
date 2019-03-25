@@ -7,20 +7,28 @@ import {LinkDrawingModeType} from "../Enums";
 import {get as getPath} from "object-path";
 import {generatePathForLineWithArrow} from "../Utils";
 
+const DefaultAnchorLinkOption: AnchorLinkOption = {
+    attrs: {
+        fill: "black",
+        stroke: "black",
+        "stroke-width": 2
+    }
+};
+
 export default class AnchorLinkDrawing extends Drawing implements IAnchorLinkDrawing {
-    constructor(option: AnchorLinkOption) {
-        if (!option.from) {
+    constructor({from, to, mode, ...option}: AnchorLinkOption) {
+        if (!from) {
             throw new Error(`option.from is required`);
         }
-        if (!option.to) {
+        if (!to) {
             throw new Error(`option.to is required`);
         }
-        super(option);
-        this.from = option.from;
-        this.to = option.to;
+        super(merge(DefaultAnchorLinkOption, option || {}));
+        this.from = from;
+        this.to = to;
         this.mode = merge({
             type: LinkDrawingModeType.line
-        }, option.mode || {});
+        }, mode || {});
     }
 
     initialize(...args) {
@@ -31,6 +39,7 @@ export default class AnchorLinkDrawing extends Drawing implements IAnchorLinkDra
         else if (this.mode.type === LinkDrawingModeType.lineWithArrow) {
             this.selection = d3.select(this.graph.ele).append("path");
         }
+
         this.addListener(DrawingEvents.anchorRender(this.from.id), () => this.render());
         this.addListener(DrawingEvents.anchorRender(this.to.id), () => this.render());
     }

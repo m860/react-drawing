@@ -94,7 +94,9 @@ export interface IDrawing {
 
     emit(name: string, data: any): void,
 
-    formatPath(data: Array<PathType>): string
+    formatPath(data: Array<PathType>): string,
+
+    findDrawingByID(id: string): ?IDrawing
 }
 
 export type LinkDrawingMode = {
@@ -119,6 +121,7 @@ export interface ILinkDrawing extends IDrawing {
     to: string,
     mode: LinkDrawingMode,
     linkText: Array<ILinkTextDrawing>,
+    link: IAnchorLinkDrawing,
 
     getTextPosition(): Point
 }
@@ -142,6 +145,18 @@ export interface IAnchorDrawing extends IDrawing {
     offset: Point,
 
     getOffset(): Point
+}
+
+export type AnchorLinkOption = DrawingOption & {
+    from: IAnchorDrawing,
+    to: IAnchorDrawing,
+    mode: LinkDrawingMode
+};
+
+export interface IAnchorLinkDrawing extends IDrawing {
+    from: IAnchorDrawing,
+    to: IAnchorDrawing,
+    mode: LinkDrawingMode
 }
 
 export type LinkTextOption = DrawingOption & {};
@@ -185,4 +200,18 @@ export interface INumberScaleDrawing extends IDrawing {
     xAxisLength: number,
     yAxisLength: number,
     scale: number
+}
+
+export interface IJointDrawing extends IAnchorDrawing {
+
+}
+
+export type PolylineLinkDrawingOption = LinkDrawingOption & {
+    jointCount: number
+}
+
+export interface IPolylineLinkDrawing extends ILinkDrawing {
+    jointCount: number,
+    joints: Array<IJointDrawing>,
+    links: Array<IAnchorLinkDrawing>
 }

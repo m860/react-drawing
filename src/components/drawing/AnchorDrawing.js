@@ -26,6 +26,7 @@ export default class AnchorDrawing extends Drawing implements IAnchorDrawing {
     initialize(...args) {
         super.initialize(...args);
         this.selection = d3.select(this.graph.ele).append("circle");
+        this.applyAttrs(this.attrs);
     }
 
     getPosition(): Point {

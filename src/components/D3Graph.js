@@ -923,8 +923,18 @@ export default class D3Graph extends Component {
      * @private
      * */
     findShapeById(id) {
-        const index = this.shapes.findIndex(f => f.id === id);
-        return this.shapes[index];
+        let i=0;
+        let len=this.shapes.length;
+        for(;i<len;i++){
+            const shape=this.shapes[i];
+            const result=shape.findDrawingByID(id);
+            if(result){
+                return result;
+            }
+        }
+        return null;
+        // const index = this.shapes.findIndex(f => f.id === id);
+        // return this.shapes[index];
     }
 
     getSelectedShapes() {
@@ -999,6 +1009,7 @@ export default class D3Graph extends Component {
         switch (action.type) {
             case ActionEnum.draw: {
                 this.shapes.push(action.params);
+                // console.log(this.shapes)
                 this.drawShapes([action.params]);
                 break;
             }

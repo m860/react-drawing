@@ -330,6 +330,85 @@ class Example extends Component {
                                                 params: [{
                                                     type: "CircleDrawing",
                                                     option: {
+                                                        id: "tag11",
+                                                        attrs: {
+                                                            r: 20,
+                                                            cx: 100,
+                                                            cy: 100
+                                                        },
+                                                        anchors: [{
+                                                            offset: {
+                                                                x: 20,
+                                                                y: 0
+                                                            },
+                                                            attrs: {
+                                                                fill: "blue",
+                                                                stroke: "blue"
+                                                            },
+                                                            id: "right11"
+                                                        }]
+                                                    }
+                                                }]
+                                            }, {
+                                                type: "draw",
+                                                params: [{
+                                                    type: "CircleDrawing",
+                                                    option: {
+                                                        id: "tag22",
+                                                        attrs: {
+                                                            cx: 200,
+                                                            cy: 100,
+                                                            r: 20
+                                                        },
+                                                        anchors: [{
+                                                            offset: {
+                                                                x: -20,
+                                                                y: 0
+                                                            },
+                                                            attrs: {
+                                                                fill: "blue",
+                                                                stroke: "blue",
+                                                            },
+                                                            id: "left22"
+                                                        }]
+                                                    }
+                                                }]
+                                            }, {
+                                                type: "draw",
+                                                params: [{
+                                                    type: "PolylineLinkDrawing",
+                                                    option: {
+                                                        from: ["tag11", "right11"],
+                                                        to: ["tag22", "left22"],
+                                                        linkText: [{
+                                                            text: "文本1",
+                                                            attrs: {
+                                                                dx: 0,
+                                                                dy: -10
+                                                            }
+                                                        }, {
+                                                            text: "文本2",
+                                                            attrs: {
+                                                                dx: 0,
+                                                                dy: 10,
+                                                                fill: "red",
+                                                                stroke: "red"
+                                                            }
+                                                        }]
+                                                    }
+                                                }]
+                                            }])
+                                        }, this.exec.bind(this))
+                                    }}>连接图形(折线)
+                            </button>
+                            <button type="button"
+                                    onClick={() => {
+                                        this.setState({
+                                            actionJson: JSON.stringify([{
+                                                type: "draw",
+                                                params: [{
+                                                    type: "CircleDrawing",
+                                                    option: {
                                                         id: "tag3",
                                                         attrs: {
                                                             r: 20,
