@@ -173,3 +173,17 @@ export type TextCircleOption = DrawingOption & {
 export interface ITextCircleDrawing extends IDrawing {
     textDrawing: IDrawing
 }
+
+export type NumberScaleOption = DrawingOption & {
+    original: Point,
+    xAxisLength: number,
+    yAxisLength: number,
+    scale: number
+}
+
+export interface INumberScaleDrawing extends IDrawing{
+    original: Point,
+    xAxisLength: number,
+    yAxisLength: number,
+    scale: number
+}

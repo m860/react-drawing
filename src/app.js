@@ -548,6 +548,18 @@ class Example extends Component {
                                     actionJson: JSON.stringify([{
                                         type: "draw",
                                         params: [{
+                                            type: "NumberScaleDrawing"
+                                        }]
+                                    }])
+                                }, this.exec.bind(this))
+                            }}>刻度尺
+                            </button>
+                            <button type="button" onClick={() => {
+                                const id = guid.raw();
+                                this.setState({
+                                    actionJson: JSON.stringify([{
+                                        type: "draw",
+                                        params: [{
                                             type: "TextDrawing",
                                             option: {
                                                 id: id,
