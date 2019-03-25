@@ -45,29 +45,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DefaultTagOption = {
-    attrs: {
-        fill: "black",
-        stroke: "black",
-        r: "10px",
-        cx: 100,
-        cy: 100
-    },
-    tag: "circle",
-    moveTo: function moveTo(vec) {
-        if (this.selection) {
-            var position = this.getPosition();
-            var nextPosition = {
-                x: position.x + vec.x,
-                y: position.y + vec.y
-            };
-            this.render({
-                cx: nextPosition.x,
-                cy: nextPosition.y
-            });
-        }
-    }
-};
+var DefaultTagOption = {};
 
 var TagDrawing = function (_Drawing) {
     (0, _inherits3.default)(TagDrawing, _Drawing);
@@ -76,11 +54,14 @@ var TagDrawing = function (_Drawing) {
         (0, _classCallCheck3.default)(this, TagDrawing);
 
         var opt = (0, _deepmerge2.default)(DefaultTagOption, option || {});
+        if (!opt.tag || opt.tag.length === 0) {
+            throw new Error("option.tag is required");
+        }
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (TagDrawing.__proto__ || (0, _getPrototypeOf2.default)(TagDrawing)).call(this, opt));
 
         _this.tag = opt.tag;
-        _this.moveTo = opt.moveTo.bind(_this);
+        // this.moveTo = opt.moveTo.bind(this);
         return _this;
     }
 
@@ -97,12 +78,9 @@ var TagDrawing = function (_Drawing) {
             this.selection = d3.select(this.graph.ele).append(this.tag);
         }
     }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return {
-                x: parseFloat(this.selection.attr("cx")),
-                y: parseFloat(this.selection.attr("cy"))
-            };
+        key: "moveTo",
+        value: function moveTo(vec) {
+            throw new Error("Not implementation");
         }
     }]);
     return TagDrawing;

@@ -51,10 +51,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DefaultAnchorOption = {
     attrs: {
-        fill: "red",
-        stroke: "red",
-        "stroke-width": "1px",
-        r: 4
+        fill: "blue",
+        stroke: "blue",
+        r: 4,
+        opacity: 0.2
     }
 };
 
@@ -72,7 +72,6 @@ var AnchorDrawing = function (_Drawing) {
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (AnchorDrawing.__proto__ || (0, _getPrototypeOf2.default)(AnchorDrawing)).call(this, opt));
 
-        _this.type = "anchor";
         _this.offset = opt.offset;
         return _this;
     }
@@ -93,8 +92,8 @@ var AnchorDrawing = function (_Drawing) {
         key: "getPosition",
         value: function getPosition() {
             return {
-                x: this.selection.attr("cx"),
-                y: this.selection.attr("cy")
+                x: parseFloat(this.selection.attr("cx")),
+                y: parseFloat(this.selection.attr("cy"))
             };
         }
     }, {

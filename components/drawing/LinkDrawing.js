@@ -55,6 +55,8 @@ var _LinkTextDrawing = require("./LinkTextDrawing");
 
 var _LinkTextDrawing2 = _interopRequireDefault(_LinkTextDrawing);
 
+var _objectPath = require("object-path");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -63,7 +65,7 @@ var DefaultLinkOption = {
     attrs: {
         fill: "transparent",
         stroke: "black",
-        "stroke-width": "1px"
+        "stroke-width": 2
     },
     mode: {
         type: _Enums.LinkDrawingModeType.line
@@ -158,6 +160,8 @@ var LinkDrawing = function (_Drawing) {
                     this.selection = d3.select(this.graph.ele).append("line");
                     break;
                 case _Enums.LinkDrawingModeType.lineWithArrow:
+                    this.selection = d3.select(this.graph.ele).append("path");
+                    break;
                 case _Enums.LinkDrawingModeType.multipleLine:
                 default:
                     throw new Error("Not implementation");
@@ -172,8 +176,8 @@ var LinkDrawing = function (_Drawing) {
             this.addListener(_DrawingEvents2.default.anchorRender(toAnchorID), this.onAnchorRender);
         }
     }, {
-        key: "render",
-        value: function render() {
+        key: "renderLine",
+        value: function renderLine() {
             var _getAllAnchors2 = this._getAllAnchors(),
                 _getAllAnchors3 = (0, _slicedToArray3.default)(_getAllAnchors2, 2),
                 fromAnchor = _getAllAnchors3[0],
@@ -189,6 +193,15 @@ var LinkDrawing = function (_Drawing) {
                     y2: toPosition.y
                 };
                 (0, _get4.default)(LinkDrawing.prototype.__proto__ || (0, _getPrototypeOf2.default)(LinkDrawing.prototype), "render", this).call(this, nextAttrs);
+            }
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            if (this.mode.type === _Enums.LinkDrawingModeType.line) {
+                this.renderLine();
+            } else if (this.mode.type === _Enums.LinkDrawingModeType.lineWithArrow) {
+                this.renderLineWithArrow();
             }
             var textBasePosition = this.getTextPosition();
             this.linkText.forEach(function (linkText) {
@@ -231,6 +244,46 @@ var LinkDrawing = function (_Drawing) {
             this.linkText.forEach(function (linkText) {
                 return linkText.remove();
             });
+        }
+    }, {
+        key: "generatePathForLineWithArrow",
+        value: function generatePathForLineWithArrow(begin, end, distance) {
+            var diffX = begin.x - end.x;
+            var diffY = begin.y - end.y;
+            var a = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
+            var ex = diffX / a;
+            var ey = diffY / a;
+
+            var q2x = end.x + ex * distance;
+            var q2y = end.y + ey * distance;
+
+            var fx = Math.cos(Math.PI / 2) * ex + Math.sin(Math.PI / 2) * ey;
+            var fy = -Math.sin(Math.PI / 2) * ex + Math.cos(Math.PI / 2) * ey;
+            var q1x = q2x + fx * distance * 0.5;
+            var q1y = q2y + fy * distance * 0.5;
+
+            var gx = Math.cos(-Math.PI / 2) * ex + Math.sin(-Math.PI / 2) * ey;
+            var gy = -Math.sin(-Math.PI / 2) * ex + Math.cos(-Math.PI / 2) * ey;
+            var q3x = q2x + gx * distance * 0.5;
+            var q3y = q2y + gy * distance * 0.5;
+
+            return [{ action: "M", x: begin.x, y: begin.y }, { action: "L", x: q2x, y: q2y }, { action: "L", x: q1x, y: q1y }, { action: "L", x: end.x, y: end.y }, { action: "L", x: q3x, y: q3y }, { action: "L", x: q2x, y: q2y }, { action: "L", x: begin.x, y: begin.y }, { action: "Z" }];
+        }
+    }, {
+        key: "renderLineWithArrow",
+        value: function renderLineWithArrow() {
+            var _getAllAnchors6 = this._getAllAnchors(),
+                _getAllAnchors7 = (0, _slicedToArray3.default)(_getAllAnchors6, 2),
+                fromAnchor = _getAllAnchors7[0],
+                toAnchor = _getAllAnchors7[1];
+
+            if (fromAnchor && toAnchor) {
+                var fromPosition = fromAnchor.getPosition();
+                var toPosition = toAnchor.getPosition();
+                var distance = (0, _objectPath.get)(this.mode, "option.distance", 5);
+                var d = this.generatePathForLineWithArrow(fromPosition, toPosition, distance / this.graph.scale);
+                (0, _get4.default)(LinkDrawing.prototype.__proto__ || (0, _getPrototypeOf2.default)(LinkDrawing.prototype), "render", this).call(this, { d: this.formatPath(d) });
+            }
         }
     }]);
     return LinkDrawing;

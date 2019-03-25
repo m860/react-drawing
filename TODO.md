@@ -5,7 +5,7 @@
 - [x] 链接线支持多文本编辑
 - [ ] 链接线支持折点编辑
 - [ ] 链接线的label支持自定义
-- [ ] 重构`NumberScaleDrawing`
+- [x] 重构`NumberScaleDrawing`
 - [ ] 重构 Action
 - [ ] 重构 Toolbar
 - [ ] 图形的渲染方式使用 react 组件的方式来做,移除d3的运行方式

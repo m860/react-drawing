@@ -52,6 +52,7 @@ var Drawing = function () {
             this.anchors = [];
         }
         this.listeners = [];
+        this.type = this.constructor.name;
     }
 
     (0, _createClass3.default)(Drawing, [{
@@ -74,9 +75,8 @@ var Drawing = function () {
                     }
                 });
                 this.selection.attr("shape-id", this.id);
+                this.selection.attr("shape-type", this.type);
                 this.text && this.selection.text(this.text);
-            } else {
-                throw new Error("图形还没有初始化");
             }
         }
     }, {
@@ -94,7 +94,7 @@ var Drawing = function () {
         value: function render() {
             var nextAttrs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-            var attrs = _deepmerge2.default.all([this.attrs, this.selected ? this.selectedAttrs : {}, nextAttrs]);
+            var attrs = _deepmerge2.default.all([this.attrs || {}, this.selected ? this.selectedAttrs : {}, nextAttrs]);
             this.applyAttrs(attrs);
             var position = this.getPosition();
             this.anchors.forEach(function (anchor) {
@@ -173,6 +173,19 @@ var Drawing = function () {
         value: function emit(name, data) {
             console.log("emit : " + name);
             _DrawingEmitter2.default.emit(name, data);
+        }
+    }, {
+        key: "formatPath",
+        value: function formatPath(data) {
+            var _this2 = this;
+
+            var arr = data.map(function (item) {
+                if (item.x === null || item.x === undefined || item.y === null || item.y === undefined) {
+                    return item.action;
+                }
+                return item.action + " " + _this2.graph.toScreenX(item.x) + " " + _this2.graph.toScreenY(item.y);
+            });
+            return arr.join(" ");
         }
     }]);
     return Drawing;

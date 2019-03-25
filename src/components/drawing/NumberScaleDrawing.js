@@ -17,10 +17,10 @@ export default class NumberScaleDrawing extends Drawing implements INumberScaleD
     constructor(option: NumberScaleOption) {
         const opt = merge(DefaultNumberScaleOption, option || {});
         super(opt);
-        this.original = option.original;
-        this.xAxisLength = option.xAxisLength;
-        this.yAxisLength = option.yAxisLength;
-        this.scale = option.scale
+        this.original = opt.original;
+        this.xAxisLength = opt.xAxisLength;
+        this.yAxisLength = opt.yAxisLength;
+        this.scale = opt.scale
     }
 
     initialize(...args) {

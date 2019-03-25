@@ -9,4 +9,5 @@ export default {
     TextDrawing:require("./TextDrawing").default,
     GroupDrawing:require("./GroupDrawing").default,
     TextCircleDrawing:require("./TextCircleDrawing").default,
+    NumberScaleDrawing:require("./NumberScaleDrawing").default,
 }
