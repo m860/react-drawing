@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Drawing anchors 1`] = `
+<svg>
+  <rect
+    height={100}
+    width={100}
+    x={50}
+    y={50}
+  />
+  <rect
+    fill="black"
+    height={6}
+    stroke="black"
+    width={6}
+    x={97}
+    y={47}
+  />
+  <rect
+    fill="black"
+    height={6}
+    stroke="black"
+    width={6}
+    x={147}
+    y={97}
+  />
+</svg>
+`;

@@ -1,4 +1,5 @@
 import * as React from "react"
+import Anchor from "./Anchor";
 
 type Props = {
     x: number,
@@ -43,7 +44,7 @@ export default class Drawing extends React.PureComponent<Props> {
         return {};
     }
 
-    render() {
+    renderChildren() {
         if (this.props.children instanceof Array) {
             return this.props.children.map((children, index) => {
                 return React.cloneElement(children, {
@@ -55,5 +56,20 @@ export default class Drawing extends React.PureComponent<Props> {
         return React.cloneElement(this.props.children, {
             ...this.getPosition(this.props.children)
         });
+    }
+
+    renderAnchors() {
+        return this.props.anchors.map((anchor, index) => {
+            return <Anchor x={this.props.x + anchor.x} y={this.props.y + anchor.y} key={`anchor-${index}`}/>
+        })
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                {this.renderChildren()}
+                {this.renderAnchors()}
+            </React.Fragment>
+        );
     }
 }

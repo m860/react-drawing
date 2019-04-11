@@ -6,9 +6,8 @@ import Drawing from "../component/Drawing"
 function App() {
     return (
         <Svg>
-            <Drawing x={100} y={100}>
-                <line x1={-50} y1={0} x2={50} y2={0} fill="black" stroke="black" strokeWidth={2}></line>
-                <line x1={0} y1={-50} x2={0} y2={50} fill="black" stroke="black" strokeWidth={2}></line>
+            <Drawing x={100} y={100} anchors={[{x: 0, y: -50}, {x: 50, y: 0}]}>
+                <rect x={-50} y={-50} width={100} height={100} fill="transparent" stroke="red"></rect>
             </Drawing>
         </Svg>
     )
