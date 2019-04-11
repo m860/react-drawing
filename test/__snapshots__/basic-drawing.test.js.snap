@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Drawing circle 1`] = `
+<svg>
+  <circle
+    cx={100}
+    cy={100}
+    fill="black"
+    r={10}
+    stroke="black"
+  />
+</svg>
+`;
+
+exports[`Drawing ellipse 1`] = `
+<svg>
+  <ellipse
+    cx={100}
+    cy={100}
+    rx={110}
+    ry={110}
+  />
+</svg>
+`;
+
+exports[`Drawing image 1`] = `
+<svg>
+  <image
+    x={100}
+    y={100}
+  />
+</svg>
+`;
+
+exports[`Drawing line 1`] = `
+<svg>
+  <line
+    fill="black"
+    stroke="black"
+    x1={50}
+    x2={150}
+    y1={100}
+    y2={100}
+  />
+</svg>
+`;
+
+exports[`Drawing rect 1`] = `
+<svg>
+  <rect
+    fill="black"
+    height={100}
+    stroke="black"
+    width={100}
+    x={50}
+    y={50}
+  />
+</svg>
+`;
+
+exports[`Drawing text 1`] = `
+<svg>
+  <text
+    fill="black"
+    stroke="black"
+    x={100}
+    y={100}
+  >
+    abc
+  </text>
+</svg>
+`;
+
+exports[`Drawing two line 1`] = `
+<svg>
+  <line
+    fill="black"
+    stroke="black"
+    x1={50}
+    x2={150}
+    y1={100}
+    y2={100}
+  />
+  <line
+    fill="black"
+    stroke="black"
+    x1={100}
+    x2={100}
+    y1={50}
+    y2={150}
+  />
+</svg>
+`;
