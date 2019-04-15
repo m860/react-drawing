@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "cm": "git-cz",
-    "start": "webpack-dev-server --config webpack.config.js"
+    "start": "webpack-dev-server --config webpack.config.js",
+    "storybook": "start-storybook"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-info": "^5.0.6",
+    "@storybook/react": "^5.0.6",
     "@types/jest": "^24.0.11",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
